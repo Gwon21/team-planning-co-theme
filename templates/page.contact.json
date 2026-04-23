@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "contact": {
+      "type": "page-contact",
+      "settings": {
+        "heading": "Initiate Contact",
+        "intro_text": "Ready to book a service or have questions about which kit is right for you? Fill out the form and we will be in touch within one business day.",
+        "service_1": "Custom Retreat Planning",
+        "service_2": "Day-Of Coordination",
+        "service_3": "Planning Consultation",
+        "service_4": "Full Event Management",
+        "service_5": "Kit Recommendation Help",
+        "label_name": "Full Name",
+        "placeholder_name": "Required",
+        "label_email": "Email Address",
+        "placeholder_email": "you@domain.com",
+        "label_interest": "I Am Interested In",
+        "placeholder_interest": "Select One...",
+        "label_body": "Tell Us About Your Event",
+        "placeholder_body": "Event type, date, group size, goals...",
+        "submit_label": "Submit Inquiry",
+        "success_message": "Thank you for reaching out. We will be in touch within one business day."
+      }
+    }
+  },
+  "order": ["contact"]
+}
