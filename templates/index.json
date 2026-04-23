@@ -17,18 +17,15 @@
         "heading_accent": "RETREAT.",
         "subheading": "Complete downloadable planning kits for youth retreats, women's gatherings, VBS programs, and church events. Ready to use in minutes.",
         "button_text": "Browse All Kits",
+        "button_link": "",
         "button_secondary_text": "See What's Included",
+        "button_secondary_link": "",
         "offset_label": "EST.",
         "offset_value": "2022"
       }
     },
     "manifesto": {
       "type": "manifesto",
-      "settings": {
-        "eyebrow": "OUR MISSION",
-        "heading": "DONE-FOR-YOU\nIS THE NEW\n",
-        "heading_highlight": "PLANNING."
-      },
       "blocks": {
         "col1": {
           "type": "column",
@@ -49,30 +46,57 @@
           }
         }
       },
-      "block_order": ["col1", "col2", "col3"]
+      "block_order": [
+        "col1",
+        "col2",
+        "col3"
+      ],
+      "settings": {
+        "eyebrow": "OUR MISSION",
+        "heading": "DONE-FOR-YOU\nIS THE NEW",
+        "heading_highlight": "PLANNING."
+      }
     },
     "featured": {
       "type": "featured-collections",
-      "settings": {
-        "heading": "FEATURED\nKITS",
-        "subheading": "CURATED RESOURCES",
-        "date_range": "2023 — 2025",
-        "view_all_text": "Browse All Kits"
-      },
       "blocks": {
-        "card1": { "type": "collection_card", "settings": { "label": "YOUTH RETREAT KIT" } },
-        "card2": { "type": "collection_card", "settings": { "label": "WOMEN'S RETREAT KIT" } },
-        "card3": { "type": "collection_card", "settings": { "label": "VBS PLANNING KIT" } }
+        "card1": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "",
+            "label": "YOUTH RETREAT KIT"
+          }
+        },
+        "card2": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "",
+            "label": "WOMEN'S RETREAT KIT"
+          }
+        },
+        "card3": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "",
+            "label": "VBS PLANNING KIT"
+          }
+        }
       },
-      "block_order": ["card1", "card2", "card3"]
+      "block_order": [
+        "card1",
+        "card2",
+        "card3"
+      ],
+      "settings": {
+        "heading": "FEATUREDKITS",
+        "subheading": "CURATED RESOURCES",
+        "date_range": "2026",
+        "view_all_text": "Browse All Kits",
+        "view_all_link": ""
+      }
     },
     "process": {
       "type": "process-steps",
-      "settings": {
-        "heading": "HOW IT\nWORKS",
-        "subheading": "From purchase to planning table in three simple steps.",
-        "button_text": "Get Your Kit"
-      },
       "blocks": {
         "step1": {
           "type": "step",
@@ -96,7 +120,17 @@
           }
         }
       },
-      "block_order": ["step1", "step2", "step3"]
+      "block_order": [
+        "step1",
+        "step2",
+        "step3"
+      ],
+      "settings": {
+        "heading": "HOW IT\nWORKS",
+        "subheading": "From purchase to planning table in three simple steps.",
+        "button_text": "Get Your Kit",
+        "button_link": ""
+      }
     },
     "newsletter": {
       "type": "newsletter",
@@ -109,5 +143,11 @@
       }
     }
   },
-  "order": ["hero", "manifesto", "featured", "process", "newsletter"]
+  "order": [
+    "hero",
+    "manifesto",
+    "featured",
+    "process",
+    "newsletter"
+  ]
 }
