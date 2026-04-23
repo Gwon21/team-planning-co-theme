@@ -22,12 +22,26 @@
     "type_header_font": "Epilogue",
     "type_body_font": "Manrope",
     "type_base_size": 16,
-    "logo_text": "FAITHFUL OCCASIONS",
     "logo_max_width": 160,
+    "logo_text": "T.E.A.M Planning Co.",
     "main_menu": "main-menu",
     "header_sticky": true,
     "footer_tagline": "Planning resources for churches and ministry leaders.",
-    "footer_menu": "footer"
+    "footer_menu": "footer",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "menu": "main-menu",
+          "sticky_header": true
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {}
+      }
+    },
+    "content_for_index": []
   },
   "presets": {}
 }
