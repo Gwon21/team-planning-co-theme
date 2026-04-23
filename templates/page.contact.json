@@ -30,7 +30,21 @@
         "submit_label": "Submit Inquiry",
         "success_message": "Thank you for reaching out. We will be in touch within one business day."
       }
+    },
+    "newsletter_8U8RNL": {
+      "type": "newsletter",
+      "name": "Newsletter Signup",
+      "settings": {
+        "eyebrow": "JOIN THE COMMUNITY",
+        "heading": "NEW KITS & RESOURCES EVERY MONTH",
+        "subtext": "Get free planning tips, new product announcements, and exclusive discounts sent straight to your inbox.",
+        "placeholder": "YOUR@EMAIL.COM",
+        "button_text": "SUBSCRIBE"
+      }
     }
   },
-  "order": ["contact"]
+  "order": [
+    "contact",
+    "newsletter_8U8RNL"
+  ]
 }
