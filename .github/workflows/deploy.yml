@@ -15,15 +15,15 @@ jobs:
       - name: Deploy to Live (main)
         if: github.ref == 'refs/heads/main'
         env:
-          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_THEME_TOKEN }}
+          SHOPIFY_CLI_PARTNERS_TOKEN: ${{ secrets.SHOPIFY_API_SECRET }}
         run: shopify theme push --theme ${{ secrets.LIVE_THEME_ID }} --store ${{ secrets.SHOPIFY_STORE }} --allow-live
       - name: Deploy to Staging
         if: github.ref == 'refs/heads/staging'
         env:
-          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_THEME_TOKEN }}
+          SHOPIFY_CLI_PARTNERS_TOKEN: ${{ secrets.SHOPIFY_API_SECRET }}
         run: shopify theme push --theme ${{ secrets.STAGING_THEME_ID }} --store ${{ secrets.SHOPIFY_STORE }}
       - name: Deploy to Dev
         if: github.ref == 'refs/heads/dev'
         env:
-          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_THEME_TOKEN }}
+          SHOPIFY_CLI_PARTNERS_TOKEN: ${{ secrets.SHOPIFY_API_SECRET }}
         run: shopify theme push --theme ${{ secrets.DEV_THEME_ID }} --store ${{ secrets.SHOPIFY_STORE }}
