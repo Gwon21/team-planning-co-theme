@@ -1,0 +1,320 @@
+<section class="featured-collections" {{ section.shopify_attributes }}>
+  <div class="featured-collections__inner">
+
+    <!-- Section Header -->
+    <div class="featured-collections__header">
+      <h2 class="featured-collections__heading">
+        {{ section.settings.heading | upcase | newline_to_br }}
+      </h2>
+      <div class="featured-collections__header-right">
+        {%- if section.settings.subheading != blank -%}
+          <span class="featured-collections__sub">{{ section.settings.subheading }}</span>
+        {%- endif -%}
+        <span class="featured-collections__year">{{ section.settings.date_range }}</span>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="featured-collections__grid">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'product_card' -%}
+            {%- assign product = all_products[block.settings.product] -%}
+            {%- if product != blank -%}
+              <div class="prod-card{% cycle '', ' prod-card--offset', '' %}" {{ block.shopify_attributes }}>
+                {% render 'product-card', product: product, block: block %}
+              </div>
+            {%- endif -%}
+          {%- when 'collection_card' -%}
+            {%- assign col = collections[block.settings.collection] -%}
+            {%- if col != blank -%}
+              {%- assign featured_product = col.products.first -%}
+              <div class="prod-card{% cycle '', ' prod-card--offset', '' %}" {{ block.shopify_attributes }}>
+                <div class="prod-card__image-wrap">
+                  {%- if col.image != blank -%}
+                    <img
+                      src="{{ col.image | image_url: width: 600 }}"
+                      alt="{{ col.title | escape }}"
+                      loading="lazy"
+                      width="600"
+                    >
+                  {%- elsif featured_product.featured_image != blank -%}
+                    <img
+                      src="{{ featured_product.featured_image | image_url: width: 600 }}"
+                      alt="{{ col.title | escape }}"
+                      loading="lazy"
+                      width="600"
+                    >
+                  {%- else -%}
+                    {{ 'collection-1' | placeholder_svg_tag: 'prod-card__placeholder' }}
+                  {%- endif -%}
+                  <div class="prod-card__overlay"></div>
+                </div>
+                <div class="prod-card__info">
+                  <div>
+                    <h3 class="prod-card__title">{{ col.title | upcase }}</h3>
+                    <p class="prod-card__type">{{ block.settings.label }}</p>
+                  </div>
+                  <a class="prod-card__number" href="{{ col.url }}">VIEW &rarr;</a>
+                </div>
+              </div>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.view_all_text != blank -%}
+      <div class="featured-collections__footer">
+        <a class="btn btn--tertiary" href="{{ section.settings.view_all_link | default: routes.collections_url }}">
+          {{ section.settings.view_all_text | upcase }}
+        </a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% stylesheet %}
+  .featured-collections {
+    padding: 7rem 0;
+    background-color: var(--color-surface);
+  }
+
+  .featured-collections__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .featured-collections__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(195, 198, 206, 0.3);
+  }
+
+  .featured-collections__heading {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  .featured-collections__header-right {
+    text-align: right;
+  }
+
+  .featured-collections__sub {
+    display: block;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .featured-collections__year {
+    display: block;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.85rem;
+    color: var(--color-on-surface-variant);
+  }
+
+  .featured-collections__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem 2.5rem;
+  }
+
+  .prod-card {
+    cursor: pointer;
+  }
+
+  .prod-card--offset {
+    margin-top: 4rem;
+  }
+
+  .prod-card__image-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    margin-bottom: 1.5rem;
+  }
+
+  .prod-card__image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease, filter 0.7s ease;
+    filter: grayscale(1);
+  }
+
+  .prod-card:hover .prod-card__image-wrap img {
+    filter: grayscale(0);
+    transform: scale(1.04);
+  }
+
+  .prod-card__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 37, 66, 0.2);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .prod-card:hover .prod-card__overlay {
+    opacity: 1;
+  }
+
+  .prod-card__placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-surface-container-low);
+  }
+
+  .prod-card__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .prod-card__title {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 0 0 0.35rem;
+    line-height: 1.1;
+  }
+
+  .prod-card__type {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    margin: 0;
+  }
+
+  .prod-card__number {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    flex-shrink: 0;
+    margin-left: 1rem;
+    transition: color 0.2s ease;
+  }
+
+  .prod-card__number:hover {
+    color: var(--color-secondary);
+  }
+
+  .featured-collections__footer {
+    margin-top: 4rem;
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .featured-collections__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .prod-card--offset { margin-top: 0; }
+  }
+
+  @media (max-width: 600px) {
+    .featured-collections__grid { grid-template-columns: 1fr; }
+    .featured-collections__header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .featured-collections__header-right { text-align: left; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Featured Collections",
+  "tag": "section",
+  "class": "shopify-section--featured",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "FEATURED\nKITS"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub Label",
+      "default": "CURATED RESOURCES"
+    },
+    {
+      "type": "text",
+      "id": "date_range",
+      "label": "Date Range Display",
+      "default": "2023 — 2025"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View All Button Text",
+      "default": "Browse All Kits"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View All Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    },
+    {
+      "type": "collection_card",
+      "name": "Collection Card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Card Type Label",
+          "default": "PLANNING KIT"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collections",
+      "blocks": [
+        { "type": "collection_card" },
+        { "type": "collection_card" },
+        { "type": "collection_card" }
+      ]
+    }
+  ],
+  "max_blocks": 6
+}
+{% endschema %}

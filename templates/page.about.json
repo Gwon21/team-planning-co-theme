@@ -1,0 +1,44 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "about": {
+      "type": "page-about",
+      "settings": {
+        "eyebrow": "Meet the Planner",
+        "heading": "Jiwon\nChon",
+        "subtext": "Church event planner and project manager based in the Triangle, NC — helping leaders create memorable, stress-free events through done-for-you planning kits and professional coordination services.",
+        "location": "Triangle, North Carolina",
+        "experience": "Nearly 2 Years in Church & Event Planning",
+        "specialty": "Church Events, Youth Retreats & Ministry Coordination",
+        "photo_1_alt": "Jiwon Chon — Event Planner",
+        "photo_2_alt": "Jiwon Chon — In Action",
+        "bio_text": "<p>I'm Jiwon, a church event planner and project manager based in the Triangle, NC. Over the past two years, I've had the privilege of helping churches, youth ministries, and faith-based organizations plan and execute events that their communities still talk about.</p><p>What started as a passion for serving my local church quickly grew into a calling. I've learned that a well-planned retreat or ministry event doesn't just run smoothly — it creates space for real connection, growth, and transformation. That's what drives everything I build.</p><p>As the founder of Team Planning Co., I combine my planning experience with a deep understanding of what church leaders actually need: practical tools they can use immediately, without having to start from scratch. Whether you're downloading a kit or booking a service, my goal is the same — to take the planning off your plate so you can show up fully for your people.</p>",
+        "skills_heading": "What I Bring to the Table",
+        "skills_subtext": "A blend of ministry knowledge, project management discipline, and real-world event experience.",
+        "skill_1_title": "Event Coordination",
+        "skill_1_desc": "End-to-end planning from concept to execution — schedules, vendors, logistics, and day-of management so nothing falls through the cracks.",
+        "skill_2_title": "Project Management",
+        "skill_2_desc": "Structured timelines, clear task ownership, and budget tracking — bringing corporate-level organization to church and ministry events.",
+        "skill_3_title": "Church & Ministry Knowledge",
+        "skill_3_desc": "Deep familiarity with the rhythms of ministry life — volunteer culture, pastoral expectations, limited budgets, and faith-centered programming.",
+        "skill_4_title": "Curriculum & Content Design",
+        "skill_4_desc": "Writing retreat schedules, small group guides, teaching outlines, and activity plans that are practical, engaging, and ready to use.",
+        "skill_5_title": "Volunteer Leadership",
+        "skill_5_desc": "Recruiting, briefing, and equipping volunteer teams — creating clear role expectations so everyone knows exactly what to do and when.",
+        "skill_6_title": "Digital Product Creation",
+        "skill_6_desc": "Building done-for-you planning kits that organizers can download, customize, and use immediately — no design or planning experience required.",
+        "cta_text": "Ready to plan your next event together?",
+        "cta_button": "Work With Me"
+      }
+    }
+  },
+  "order": ["about"]
+}

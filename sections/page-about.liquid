@@ -1,0 +1,767 @@
+<!-- ============================================================
+   ABOUT PAGE SECTION
+   Bio, two photos, skills — church event planner + project manager
+   ============================================================ -->
+
+<section class="about-page" {{ section.shopify_attributes }}>
+
+  <!-- ---- HERO INTRO ---- -->
+  <div class="about-intro">
+    <div class="about-intro__inner">
+      <div class="about-intro__text">
+        <p class="about-intro__eyebrow">{{ section.settings.eyebrow }}</p>
+        <h1 class="about-intro__heading">{{ section.settings.heading | newline_to_br }}</h1>
+        <p class="about-intro__subtext">{{ section.settings.subtext }}</p>
+      </div>
+      <div class="about-intro__meta">
+        <div class="about-meta-item">
+          <span class="about-meta-item__label">Location</span>
+          <span class="about-meta-item__value">{{ section.settings.location }}</span>
+        </div>
+        <div class="about-meta-item">
+          <span class="about-meta-item__label">Experience</span>
+          <span class="about-meta-item__value">{{ section.settings.experience }}</span>
+        </div>
+        <div class="about-meta-item">
+          <span class="about-meta-item__label">Specialty</span>
+          <span class="about-meta-item__value">{{ section.settings.specialty }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---- TWO PHOTO GRID ---- -->
+  <div class="about-photos">
+    <div class="about-photos__inner">
+
+      <div class="about-photo about-photo--primary">
+        {%- if section.settings.photo_1 != blank -%}
+          <img
+            src="{{ section.settings.photo_1 | img_url: '800x1000', crop: 'center' }}"
+            alt="{{ section.settings.photo_1_alt | default: 'About photo 1' }}"
+            loading="lazy"
+            width="800"
+            height="1000"
+          >
+        {%- else -%}
+          <div class="about-photo__placeholder">
+            <span class="about-photo__placeholder-text">Add Your Photo</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.photo_1_caption != blank -%}
+          <p class="about-photo__caption">{{ section.settings.photo_1_caption }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="about-photo about-photo--secondary">
+        {%- if section.settings.photo_2 != blank -%}
+          <img
+            src="{{ section.settings.photo_2 | img_url: '800x1000', crop: 'center' }}"
+            alt="{{ section.settings.photo_2_alt | default: 'About photo 2' }}"
+            loading="lazy"
+            width="800"
+            height="1000"
+          >
+        {%- else -%}
+          <div class="about-photo__placeholder">
+            <span class="about-photo__placeholder-text">Add Your Photo</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.photo_2_caption != blank -%}
+          <p class="about-photo__caption">{{ section.settings.photo_2_caption }}</p>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ---- BIO SECTION ---- -->
+  <div class="about-bio">
+    <div class="about-bio__inner">
+      <div class="about-bio__label-col">
+        <span class="about-bio__label">Background</span>
+      </div>
+      <div class="about-bio__content">
+        <div class="about-bio__text rte">
+          {{ section.settings.bio_text }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---- SKILLS SECTION ---- -->
+  <div class="about-skills">
+    <div class="about-skills__inner">
+
+      <div class="about-skills__header">
+        <h2 class="about-skills__heading">{{ section.settings.skills_heading }}</h2>
+        <p class="about-skills__subtext">{{ section.settings.skills_subtext }}</p>
+      </div>
+
+      <div class="about-skills__grid">
+
+        <div class="about-skill-card">
+          <span class="about-skill-card__icon">01</span>
+          <h3 class="about-skill-card__title">{{ section.settings.skill_1_title }}</h3>
+          <p class="about-skill-card__desc">{{ section.settings.skill_1_desc }}</p>
+        </div>
+
+        <div class="about-skill-card">
+          <span class="about-skill-card__icon">02</span>
+          <h3 class="about-skill-card__title">{{ section.settings.skill_2_title }}</h3>
+          <p class="about-skill-card__desc">{{ section.settings.skill_2_desc }}</p>
+        </div>
+
+        <div class="about-skill-card">
+          <span class="about-skill-card__icon">03</span>
+          <h3 class="about-skill-card__title">{{ section.settings.skill_3_title }}</h3>
+          <p class="about-skill-card__desc">{{ section.settings.skill_3_desc }}</p>
+        </div>
+
+        <div class="about-skill-card">
+          <span class="about-skill-card__icon">04</span>
+          <h3 class="about-skill-card__title">{{ section.settings.skill_4_title }}</h3>
+          <p class="about-skill-card__desc">{{ section.settings.skill_4_desc }}</p>
+        </div>
+
+        <div class="about-skill-card">
+          <span class="about-skill-card__icon">05</span>
+          <h3 class="about-skill-card__title">{{ section.settings.skill_5_title }}</h3>
+          <p class="about-skill-card__desc">{{ section.settings.skill_5_desc }}</p>
+        </div>
+
+        <div class="about-skill-card">
+          <span class="about-skill-card__icon">06</span>
+          <h3 class="about-skill-card__title">{{ section.settings.skill_6_title }}</h3>
+          <p class="about-skill-card__desc">{{ section.settings.skill_6_desc }}</p>
+        </div>
+
+      </div><!-- /.about-skills__grid -->
+    </div>
+  </div>
+
+  <!-- ---- CTA STRIP ---- -->
+  {%- if section.settings.cta_text != blank -%}
+  <div class="about-cta">
+    <div class="about-cta__inner">
+      <p class="about-cta__text">{{ section.settings.cta_text }}</p>
+      <a href="{{ section.settings.cta_link | default: '/pages/contact' }}" class="btn btn--primary">
+        {{ section.settings.cta_button }}
+      </a>
+    </div>
+  </div>
+  {%- endif -%}
+
+</section>
+
+{% stylesheet %}
+
+/* =============================================
+   ABOUT PAGE — INTRO
+   ============================================= */
+
+.about-page {
+  background-color: var(--color-surface, #fff8f4);
+}
+
+.about-intro {
+  padding: 8rem 0 5rem;
+  background-color: var(--color-surface, #fff8f4);
+}
+
+.about-intro__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: end;
+}
+
+.about-intro__eyebrow {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-secondary, #725a39);
+  margin: 0 0 1.25rem;
+}
+
+.about-intro__heading {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: var(--color-primary, #002542);
+  letter-spacing: -0.03em;
+  margin: 0 0 2rem;
+}
+
+.about-intro__subtext {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-on-surface-variant, #8a7560);
+  max-width: 480px;
+  margin: 0;
+}
+
+/* Meta info column */
+.about-intro__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.about-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(0, 37, 66, 0.1);
+}
+
+.about-meta-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.about-meta-item__label {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-secondary, #725a39);
+}
+
+.about-meta-item__value {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-primary, #002542);
+}
+
+/* =============================================
+   ABOUT PAGE — PHOTOS
+   ============================================= */
+
+.about-photos {
+  padding: 0 0 6rem;
+}
+
+.about-photos__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.about-photo {
+  overflow: hidden;
+  position: relative;
+}
+
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(0.2);
+  transition: filter 0.5s ease;
+}
+
+.about-photo:hover img {
+  filter: grayscale(0);
+}
+
+.about-photo--primary {
+  aspect-ratio: 4/5;
+}
+
+.about-photo--secondary {
+  aspect-ratio: 3/4;
+  margin-top: 5rem;
+}
+
+.about-photo__placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  background-color: var(--color-surface-container-low, #fff1e4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed rgba(0, 37, 66, 0.2);
+}
+
+.about-photo__placeholder-text {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(0, 37, 66, 0.35);
+}
+
+.about-photo__caption {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-on-surface-variant, #8a7560);
+  margin: 0.75rem 0 0;
+}
+
+/* =============================================
+   ABOUT PAGE — BIO
+   ============================================= */
+
+.about-bio {
+  padding: 5rem 0;
+  background-color: var(--color-surface-container, #ffebd3);
+}
+
+.about-bio__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.about-bio__label {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-secondary, #725a39);
+  display: block;
+  padding-top: 0.5rem;
+}
+
+.about-bio__text {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--color-on-surface, #281801);
+  max-width: 680px;
+}
+
+.about-bio__text p {
+  margin-bottom: 1.5rem;
+}
+
+.about-bio__text p:last-child {
+  margin-bottom: 0;
+}
+
+/* =============================================
+   ABOUT PAGE — SKILLS
+   ============================================= */
+
+.about-skills {
+  padding: 6rem 0;
+  background-color: var(--color-surface, #fff8f4);
+}
+
+.about-skills__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.about-skills__header {
+  margin-bottom: 4rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.about-skills__heading {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  text-transform: uppercase;
+  color: var(--color-primary, #002542);
+  letter-spacing: -0.03em;
+  margin: 0;
+  line-height: 1;
+}
+
+.about-skills__subtext {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--color-on-surface-variant, #8a7560);
+  max-width: 380px;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.about-skills__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(0, 37, 66, 0.12);
+}
+
+.about-skill-card {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid rgba(0, 37, 66, 0.12);
+  border-bottom: 1px solid rgba(0, 37, 66, 0.12);
+  transition: background-color 0.25s ease;
+}
+
+.about-skill-card:hover {
+  background-color: var(--color-surface-container-low, #fff1e4);
+}
+
+.about-skill-card:nth-child(3n) {
+  border-right: none;
+}
+
+.about-skill-card__icon {
+  display: block;
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 900;
+  font-size: 2.5rem;
+  color: rgba(0, 37, 66, 0.1);
+  letter-spacing: -0.05em;
+  margin-bottom: 1.5rem;
+  line-height: 1;
+}
+
+.about-skill-card__title {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: var(--color-primary, #002542);
+  letter-spacing: -0.01em;
+  margin: 0 0 0.75rem;
+}
+
+.about-skill-card__desc {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--color-on-surface-variant, #8a7560);
+  margin: 0;
+}
+
+/* =============================================
+   ABOUT PAGE — CTA STRIP
+   ============================================= */
+
+.about-cta {
+  background-color: var(--color-primary, #002542);
+  padding: 5rem 0;
+}
+
+.about-cta__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.about-cta__text {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  text-transform: uppercase;
+  color: var(--color-inverse-on-surface, #ffeedb);
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.1;
+  max-width: 600px;
+}
+
+.about-cta .btn--primary {
+  background: var(--color-secondary, #725a39);
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  padding: 1.15rem 2.5rem;
+}
+
+.about-cta .btn--primary:hover {
+  opacity: 0.88;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .about-skills__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .about-skill-card:nth-child(3n) {
+    border-right: 1px solid rgba(0, 37, 66, 0.12);
+  }
+  .about-skill-card:nth-child(2n) {
+    border-right: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .about-intro__inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .about-photos__inner {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .about-photo--secondary {
+    margin-top: 0;
+  }
+  .about-bio__inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .about-skills__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .about-skills__grid {
+    grid-template-columns: 1fr;
+  }
+  .about-skill-card {
+    border-right: none;
+  }
+  .about-cta__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+}
+
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "About Page",
+  "tag": "section",
+  "class": "shopify-section--about",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Intro Section"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "Meet the Planner"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Jiwon\nChon"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Intro Subtext",
+      "default": "Church event planner and project manager based in the Triangle, NC — helping leaders create memorable, stress-free events through done-for-you planning kits and professional coordination services."
+    },
+    {
+      "type": "text",
+      "id": "location",
+      "label": "Location",
+      "default": "Triangle, North Carolina"
+    },
+    {
+      "type": "text",
+      "id": "experience",
+      "label": "Experience",
+      "default": "Nearly 2 Years in Church & Event Planning"
+    },
+    {
+      "type": "text",
+      "id": "specialty",
+      "label": "Specialty",
+      "default": "Church Events, Youth Retreats & Ministry Coordination"
+    },
+    {
+      "type": "header",
+      "content": "Photo 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_1",
+      "label": "Photo 1 (Primary)"
+    },
+    {
+      "type": "text",
+      "id": "photo_1_alt",
+      "label": "Photo 1 Alt Text",
+      "default": "Jiwon Chon — Event Planner"
+    },
+    {
+      "type": "text",
+      "id": "photo_1_caption",
+      "label": "Photo 1 Caption (optional)"
+    },
+    {
+      "type": "header",
+      "content": "Photo 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_2",
+      "label": "Photo 2 (Secondary)"
+    },
+    {
+      "type": "text",
+      "id": "photo_2_alt",
+      "label": "Photo 2 Alt Text",
+      "default": "Jiwon Chon — In Action"
+    },
+    {
+      "type": "text",
+      "id": "photo_2_caption",
+      "label": "Photo 2 Caption (optional)"
+    },
+    {
+      "type": "header",
+      "content": "Bio Section"
+    },
+    {
+      "type": "richtext",
+      "id": "bio_text",
+      "label": "Your Bio",
+      "default": "<p>I'm Jiwon, a church event planner and project manager based in the Triangle, NC. Over the past two years, I've had the privilege of helping churches, youth ministries, and faith-based organizations plan and execute events that their communities still talk about.</p><p>What started as a passion for serving my local church quickly grew into a calling. I've learned that a well-planned retreat or ministry event doesn't just run smoothly — it creates space for real connection, growth, and transformation. That's what drives everything I build.</p><p>As the founder of Team Planning Co., I combine my planning experience with a deep understanding of what church leaders actually need: practical tools they can use immediately, without having to start from scratch. Whether you're downloading a kit or booking a service, my goal is the same — to take the planning off your plate so you can show up fully for your people.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Skills Section"
+    },
+    {
+      "type": "text",
+      "id": "skills_heading",
+      "label": "Skills Section Heading",
+      "default": "What I Bring\nto the Table"
+    },
+    {
+      "type": "textarea",
+      "id": "skills_subtext",
+      "label": "Skills Subtext",
+      "default": "A blend of ministry knowledge, project management discipline, and real-world event experience."
+    },
+    {
+      "type": "text",
+      "id": "skill_1_title",
+      "label": "Skill 1 Title",
+      "default": "Event Coordination"
+    },
+    {
+      "type": "textarea",
+      "id": "skill_1_desc",
+      "label": "Skill 1 Description",
+      "default": "End-to-end planning from concept to execution — schedules, vendors, logistics, and day-of management so nothing falls through the cracks."
+    },
+    {
+      "type": "text",
+      "id": "skill_2_title",
+      "label": "Skill 2 Title",
+      "default": "Project Management"
+    },
+    {
+      "type": "textarea",
+      "id": "skill_2_desc",
+      "label": "Skill 2 Description",
+      "default": "Structured timelines, clear task ownership, and budget tracking — bringing corporate-level organization to church and ministry events."
+    },
+    {
+      "type": "text",
+      "id": "skill_3_title",
+      "label": "Skill 3 Title",
+      "default": "Church & Ministry Knowledge"
+    },
+    {
+      "type": "textarea",
+      "id": "skill_3_desc",
+      "label": "Skill 3 Description",
+      "default": "Deep familiarity with the rhythms of ministry life — volunteer culture, pastoral expectations, limited budgets, and faith-centered programming."
+    },
+    {
+      "type": "text",
+      "id": "skill_4_title",
+      "label": "Skill 4 Title",
+      "default": "Curriculum & Content Design"
+    },
+    {
+      "type": "textarea",
+      "id": "skill_4_desc",
+      "label": "Skill 4 Description",
+      "default": "Writing retreat schedules, small group guides, teaching outlines, and activity plans that are practical, engaging, and ready to use."
+    },
+    {
+      "type": "text",
+      "id": "skill_5_title",
+      "label": "Skill 5 Title",
+      "default": "Volunteer Leadership"
+    },
+    {
+      "type": "textarea",
+      "id": "skill_5_desc",
+      "label": "Skill 5 Description",
+      "default": "Recruiting, briefing, and equipping volunteer teams — creating clear role expectations so everyone knows exactly what to do and when."
+    },
+    {
+      "type": "text",
+      "id": "skill_6_title",
+      "label": "Skill 6 Title",
+      "default": "Digital Product Creation"
+    },
+    {
+      "type": "textarea",
+      "id": "skill_6_desc",
+      "label": "Skill 6 Description",
+      "default": "Building done-for-you planning kits that organizers can download, customize, and use immediately — no design or planning experience required."
+    },
+    {
+      "type": "header",
+      "content": "CTA Strip"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "Ready to plan your next event together?"
+    },
+    {
+      "type": "text",
+      "id": "cta_button",
+      "label": "CTA Button Text",
+      "default": "Work With Me"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Page"
+    }
+  ]
+}
+{% endschema %}

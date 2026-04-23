@@ -1,0 +1,123 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "general": {
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "close": "Close",
+    "open_menu": "Open menu"
+  },
+  "sections": {
+    "header": {
+      "cart": "Cart ({{ count }})",
+      "search": "Search"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable",
+      "quantity_label": "Quantity",
+      "description": "Description",
+      "vendor": "Brand",
+      "from": "From",
+      "regular_price": "Regular price",
+      "sale_price": "Sale price",
+      "unit_price": "Unit price",
+      "download": "Download",
+      "digital_product": "Digital Download"
+    },
+    "general": {
+      "view_all": "View All",
+      "view_products": "View Products",
+      "no_products": "No products found",
+      "items_count": "{{ count }} product",
+      "items_count_plural": "{{ count }} products"
+    }
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty",
+    "empty_message": "Add some products to get started.",
+    "browse_products": "Browse Products",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "update": "Update Cart",
+    "remove": "Remove",
+    "continue_shopping": "Continue Shopping"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search our store...",
+    "submit": "Search",
+    "no_results": "No results for \"{{ terms }}\"",
+    "results_with_count": "{{ count }} result for \"{{ terms }}\"",
+    "results_with_count_plural": "{{ count }} results for \"{{ terms }}\""
+  },
+  "collections": {
+    "general": {
+      "view_all": "View All Kits",
+      "sort_by_label": "Sort by",
+      "filter_by_label": "Filter"
+    },
+    "sort_options": {
+      "manual": "Featured",
+      "best_selling": "Best Selling",
+      "title_ascending": "A-Z",
+      "title_descending": "Z-A",
+      "price_ascending": "Price: Low to High",
+      "price_descending": "Price: High to Low",
+      "created_descending": "Newest First",
+      "created_ascending": "Oldest First"
+    }
+  },
+  "customer": {
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Login",
+      "guest": "Continue as Guest",
+      "forgot_password": "Forgot your password?",
+      "create_account": "Create Account"
+    },
+    "register": {
+      "title": "Create Account",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Create Account",
+      "login": "Sign In"
+    },
+    "account": {
+      "title": "My Account",
+      "orders": "Order History",
+      "details": "Account Details",
+      "logout": "Log Out"
+    }
+  },
+  "404": {
+    "title": "Page Not Found",
+    "message": "The page you're looking for doesn't exist.",
+    "back_home": "Back to Home"
+  },
+  "newsletter": {
+    "subscribe": "Subscribe",
+    "email_placeholder": "YOUR@EMAIL.COM",
+    "success": "Thank you for subscribing!"
+  }
+}

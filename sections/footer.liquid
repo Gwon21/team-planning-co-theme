@@ -1,0 +1,243 @@
+<footer class="site-footer" role="contentinfo" {{ section.shopify_attributes }}>
+  <div class="site-footer__inner">
+
+    <!-- Brand Column -->
+    <div class="site-footer__brand">
+      {%- if settings.logo != blank -%}
+        <img
+          src="{{ settings.logo | image_url: width: 240 }}"
+          alt="{{ shop.name }}"
+          class="site-footer__logo"
+          width="{{ settings.logo_max_width | at_most: 160 }}"
+          loading="lazy"
+        >
+      {%- else -%}
+        <span class="site-footer__logo-text">{{ settings.logo_text | default: shop.name }}</span>
+      {%- endif -%}
+      {%- if settings.footer_tagline != blank -%}
+        <p class="site-footer__tagline">{{ settings.footer_tagline }}</p>
+      {%- endif -%}
+    </div>
+
+    <!-- Nav Column -->
+    {%- if settings.footer_menu != blank -%}
+      <nav class="site-footer__nav" aria-label="Footer Navigation">
+        {%- assign footer_links = linklists[settings.footer_menu] -%}
+        {%- if footer_links.links.size > 0 -%}
+          {%- for link in footer_links.links -%}
+            <a class="site-footer__link" href="{{ link.url }}">
+              {{ link.title | upcase }}
+            </a>
+          {%- endfor -%}
+        {%- else -%}
+          <a class="site-footer__link" href="{{ routes.root_url }}">Home</a>
+          <a class="site-footer__link" href="{{ routes.collections_url }}">Shop</a>
+          <a class="site-footer__link" href="/pages/about">About</a>
+          <a class="site-footer__link" href="/pages/contact">Contact</a>
+        {%- endif -%}
+      </nav>
+    {%- endif -%}
+
+    <!-- Social Column -->
+    <div class="site-footer__social">
+      <span class="site-footer__social-label">FOLLOW US</span>
+      {%- if settings.social_instagram != blank -%}
+        <a class="site-footer__social-link" href="{{ settings.social_instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+          INSTAGRAM
+        </a>
+      {%- endif -%}
+      {%- if settings.social_facebook != blank -%}
+        <a class="site-footer__social-link" href="{{ settings.social_facebook }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          FACEBOOK
+        </a>
+      {%- endif -%}
+      {%- if settings.social_pinterest != blank -%}
+        <a class="site-footer__social-link" href="{{ settings.social_pinterest }}" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.77 1.24-5.26 1.24-5.26s-.32-.64-.32-1.58c0-1.48.86-2.59 1.93-2.59.91 0 1.35.68 1.35 1.5 0 .91-.58 2.28-.88 3.55-.25 1.06.53 1.93 1.57 1.93 1.88 0 3.14-2.4 3.14-5.23 0-2.16-1.46-3.77-4.1-3.77-2.99 0-4.84 2.24-4.84 4.74 0 .86.25 1.46.64 1.93.18.21.2.29.14.53-.05.17-.16.58-.2.74-.07.27-.28.36-.52.26-1.45-.6-2.13-2.2-2.13-4 0-2.97 2.5-6.52 7.46-6.52 3.99 0 6.62 2.9 6.62 6.01 0 4.12-2.28 7.19-5.64 7.19-1.13 0-2.19-.61-2.55-1.3l-.69 2.67c-.25.95-.91 2.14-1.36 2.86.63.19 1.3.29 2.0.29 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+          PINTEREST
+        </a>
+      {%- endif -%}
+      {%- if settings.social_youtube != blank -%}
+        <a class="site-footer__social-link" href="{{ settings.social_youtube }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-1.94C18.88 4 12 4 12 4s-6.88 0-8.6.48A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.94 1.94C5.12 20 12 20 12 20s6.88 0 8.6-.48a2.78 2.78 0 001.94-1.94A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
+          YOUTUBE
+        </a>
+      {%- endif -%}
+    </div>
+
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="site-footer__bottom">
+    <div class="site-footer__bottom-inner">
+      <p class="site-footer__copyright">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name | upcase }}. ALL RIGHTS RESERVED.
+      </p>
+      <div class="site-footer__bottom-links">
+        <a href="/policies/privacy-policy">PRIVACY</a>
+        <a href="/policies/terms-of-service">TERMS</a>
+        <a href="/policies/refund-policy">REFUNDS</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% stylesheet %}
+  .site-footer {
+    background-color: var(--color-primary);
+  }
+
+  .site-footer__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 4rem 2rem 3rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .site-footer__logo {
+    display: block;
+    margin-bottom: 1rem;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+  }
+
+  .site-footer__logo-text {
+    display: block;
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--color-inverse-on-surface);
+    margin-bottom: 1rem;
+  }
+
+  .site-footer__tagline {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(255, 238, 219, 0.5);
+    margin: 0;
+    max-width: 280px;
+  }
+
+  .site-footer__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .site-footer__link {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 238, 219, 0.5);
+    text-decoration: none;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
+  }
+
+  .site-footer__link:hover {
+    color: var(--color-inverse-on-surface);
+    letter-spacing: 0.3em;
+  }
+
+  .site-footer__social {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .site-footer__social-label {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: rgba(255, 238, 219, 0.35);
+    margin-bottom: 0.25rem;
+  }
+
+  .site-footer__social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 238, 219, 0.5);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .site-footer__social-link:hover {
+    color: var(--color-inverse-on-surface);
+  }
+
+  .site-footer__bottom {
+    border-top: 1px solid rgba(255, 238, 219, 0.1);
+  }
+
+  .site-footer__bottom-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .site-footer__copyright {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: rgba(255, 238, 219, 0.35);
+    margin: 0;
+  }
+
+  .site-footer__bottom-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .site-footer__bottom-links a {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: rgba(255, 238, 219, 0.35);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .site-footer__bottom-links a:hover {
+    color: var(--color-inverse-on-surface);
+  }
+
+  @media (max-width: 900px) {
+    .site-footer__inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .site-footer__brand { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 600px) {
+    .site-footer__inner { grid-template-columns: 1fr; padding: 3rem 1.25rem 2rem; }
+    .site-footer__bottom-inner { flex-direction: column; text-align: center; }
+    .site-footer__bottom-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": []
+}
+{% endschema %}

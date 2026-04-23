@@ -1,0 +1,53 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "services": {
+      "type": "page-services",
+      "settings": {
+        "page_title": "Planning\nServices",
+        "brand_label": "Professional Services",
+        "brand_tagline": "We coordinate. You celebrate.",
+        "card1_tag": "Most Popular",
+        "card1_title": "Custom Retreat Planning",
+        "card1_desc": "Full-service retreat planning from theme and schedule development to vendor coordination and day-of logistics. We design the experience. You show up and lead.",
+        "card1_price_label": "Starting at",
+        "card1_price": "$599",
+        "card1_cta": "Inquire About This Service",
+        "card2_tag": "Day-Of Support",
+        "card2_title": "Day-Of Coordination",
+        "card2_desc": "You planned it. We execute it. Our coordinators manage your event timeline, vendors, and setup on the day so you can be fully present with your attendees.",
+        "card2_price_label": "Starting at",
+        "card2_price": "$299",
+        "card2_cta": "Inquire About This Service",
+        "card3_tag": "1-on-1 Session",
+        "card3_title": "Planning Consultation",
+        "card3_desc": "A focused one-hour strategy session with our lead planner. Bring your event idea, your challenges, or your timeline. Leave with a clear roadmap and actionable next steps.",
+        "card3_price_label": "Starting at",
+        "card3_price": "$149",
+        "card3_cta": "Book a Session",
+        "card4_tag": "Full Package",
+        "card4_title": "Full Event Management",
+        "card4_desc": "End-to-end planning and execution for large-scale retreats, corporate conferences, or multi-day events. Venue sourcing, vendor coordination, budget management, and full day-of oversight included.",
+        "card4_price_label": "Custom Quote",
+        "card4_cta": "Get a Custom Quote",
+        "bp_heading": "The Blueprint",
+        "bp_subtext": "Whether you buy a kit or book a service, our process is simple.",
+        "step1_title": "Choose Your Path",
+        "step1_desc": "Decide how you want to work with us. Browse our catalog of ready-to-download planning kits, or book one of our professional event planning services. Both paths lead to a confident, well-run event.",
+        "step2_title": "Get What You Need",
+        "step2_desc": "Kit buyers get instant download access to a complete planning package. Service clients get a discovery call, a custom plan, and a dedicated coordinator assigned to their event.",
+        "step3_title": "Lead with Confidence",
+        "step3_desc": "Show up fully present for your attendees. Whether you are running the event yourself with our tools or letting our team carry the load, the result is the same: a memorable, well-executed event."
+      }
+    }
+  },
+  "order": ["services"]
+}

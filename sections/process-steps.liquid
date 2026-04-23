@@ -1,0 +1,225 @@
+<section class="process" {{ section.shopify_attributes }}>
+  <div class="process__inner">
+    <div class="process__grid">
+
+      <!-- Sticky Heading -->
+      <div class="process__heading-col">
+        <h2 class="process__heading">
+          {{ section.settings.heading | newline_to_br }}
+        </h2>
+        {%- if section.settings.subheading != blank -%}
+          <p class="process__subheading">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        {%- if section.settings.button_text != blank -%}
+          <a class="btn btn--primary" href="{{ section.settings.button_link | default: routes.collections_url }}" style="margin-top: 2.5rem; display: inline-block;">
+            {{ section.settings.button_text | upcase }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      <!-- Steps -->
+      <div class="process__steps">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'step' -%}
+              <div class="process__step" {{ block.shopify_attributes }}>
+                <span class="process__step-number">
+                  {{- forloop.index | prepend: '0' | slice: -2, 2 -}}
+                </span>
+                <div class="process__step-content">
+                  <h3 class="process__step-title">{{ block.settings.title | upcase }}</h3>
+                  <p class="process__step-text">{{ block.settings.text }}</p>
+                </div>
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .process {
+    padding: 7rem 0;
+    background-color: var(--color-surface-container-low);
+    border-top: 1px solid rgba(195, 198, 206, 0.2);
+    border-bottom: 1px solid rgba(195, 198, 206, 0.2);
+  }
+
+  .process__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .process__grid {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    gap: 4rem;
+  }
+
+  .process__heading-col {
+    position: sticky;
+    top: 8rem;
+    align-self: start;
+  }
+
+  .process__heading {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 4.5vw, 3.75rem);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  .process__subheading {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-on-surface-variant);
+    margin: 1.5rem 0 0;
+    max-width: 280px;
+  }
+
+  .process__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
+
+  .process__step {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+  }
+
+  .process__step:hover .process__step-number {
+    color: var(--color-secondary);
+    transition: color 0.5s ease;
+  }
+
+  .process__step-number {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 900;
+    font-size: 5rem;
+    line-height: 1;
+    color: rgba(195, 198, 206, 0.35);
+    flex-shrink: 0;
+    transition: color 0.5s ease;
+    min-width: 5rem;
+    text-align: right;
+  }
+
+  .process__step-content {
+    padding-top: 0.75rem;
+  }
+
+  .process__step-title {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 700;
+    font-size: 1.75rem;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 0 0 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .process__step-text {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-on-surface-variant);
+    max-width: 520px;
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .process__grid { grid-template-columns: 1fr; }
+    .process__heading-col { position: static; }
+    .process__step { flex-direction: column; gap: 1rem; }
+    .process__step-number { font-size: 3.5rem; text-align: left; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Process Steps",
+  "tag": "section",
+  "class": "shopify-section--process",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "HOW IT\nWORKS"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Supporting Text",
+      "default": "From purchase to planning table in three simple steps."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Get Your Kit"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Step Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Process Steps",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Choose Your Kit",
+            "text": "Browse our library of complete planning kits organized by event type, age group, and theme. Find the one that fits your vision and budget."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Download Instantly",
+            "text": "After purchase, your full PDF package downloads immediately. No waiting, no shipping — every document, schedule, and resource lands right in your inbox."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Lead With Confidence",
+            "text": "Open your kit, customize the details for your group, and show up fully prepared. Your team will be amazed at how organized everything looks."
+          }
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6
+}
+{% endschema %}

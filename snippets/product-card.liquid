@@ -1,0 +1,73 @@
+{% comment %}
+  Usage: {% render 'product-card', product: product %}
+  Optional: block (for shopify_attributes)
+{% endcomment %}
+
+<a class="prod-card__link" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+  <div class="prod-card__image-wrap">
+    {%- if product.featured_image != blank -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        alt="{{ product.featured_image.alt | escape | default: product.title }}"
+        loading="lazy"
+        width="600"
+      >
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'prod-card__placeholder' }}
+    {%- endif -%}
+    <div class="prod-card__overlay"></div>
+
+    {%- if product.compare_at_price > product.price -%}
+      <span class="prod-card__badge prod-card__badge--sale">SALE</span>
+    {%- elsif product.tags contains 'new' -%}
+      <span class="prod-card__badge prod-card__badge--new">NEW</span>
+    {%- endif -%}
+
+    {%- unless product.available -%}
+      <span class="prod-card__badge prod-card__badge--sold-out">SOLD OUT</span>
+    {%- endunless -%}
+  </div>
+
+  <div class="prod-card__info">
+    <div>
+      <h3 class="prod-card__title">{{ product.title | upcase }}</h3>
+      {%- if product.product_type != blank -%}
+        <p class="prod-card__type">{{ product.product_type | upcase }}</p>
+      {%- endif -%}
+    </div>
+    <div class="prod-card__price-col">
+      {% render 'product-price', product: product %}
+    </div>
+  </div>
+</a>
+
+{% stylesheet %}
+  .prod-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .prod-card__badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    padding: 0.3rem 0.65rem;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+
+  .prod-card__badge--sale { background-color: var(--color-secondary); color: #fff; }
+  .prod-card__badge--new { background-color: var(--color-primary); color: var(--color-inverse-on-surface); }
+  .prod-card__badge--sold-out { background-color: rgba(40, 24, 1, 0.6); color: #fff; }
+
+  .prod-card__price-col {
+    text-align: right;
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+{% endstylesheet %}

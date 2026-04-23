@@ -1,0 +1,72 @@
+{% comment %}
+  Usage: {% render 'product-price', product: product %}
+  Renders sale price, compare-at price, and variant price range.
+{% endcomment %}
+
+<div class="product-price">
+  {%- if product.price_varies -%}
+    <span class="product-price__from">
+      {{ 'products.product.from' | t }}
+    </span>
+  {%- endif -%}
+
+  {%- if product.compare_at_price > product.price -%}
+    <span class="product-price__sale">{{ product.price | money }}</span>
+    <span class="product-price__compare">{{ product.compare_at_price | money }}</span>
+    <span class="product-price__save">
+      Save {{ product.compare_at_price | minus: product.price | money }}
+    </span>
+  {%- else -%}
+    <span class="product-price__regular">{{ product.price | money }}</span>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .product-price {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .product-price__from {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.75rem;
+    color: var(--color-on-surface-variant);
+    font-weight: 500;
+  }
+
+  .product-price__regular {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+  }
+
+  .product-price__sale {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #ba1a1a;
+  }
+
+  .product-price__compare {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.9rem;
+    color: var(--color-on-surface-variant);
+    text-decoration: line-through;
+    font-weight: 500;
+  }
+
+  .product-price__save {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    background-color: var(--color-secondary);
+    color: #fff;
+    padding: 0.2rem 0.5rem;
+    text-transform: uppercase;
+    align-self: center;
+  }
+{% endstylesheet %}

@@ -1,0 +1,113 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "eyebrow": "DIGITAL PLANNING RESOURCES",
+        "heading": "PLAN THE\nUNFORGETTABLE",
+        "heading_accent": "RETREAT.",
+        "subheading": "Complete downloadable planning kits for youth retreats, women's gatherings, VBS programs, and church events. Ready to use in minutes.",
+        "button_text": "Browse All Kits",
+        "button_secondary_text": "See What's Included",
+        "offset_label": "EST.",
+        "offset_value": "2022"
+      }
+    },
+    "manifesto": {
+      "type": "manifesto",
+      "settings": {
+        "eyebrow": "OUR MISSION",
+        "heading": "DONE-FOR-YOU\nIS THE NEW\n",
+        "heading_highlight": "PLANNING."
+      },
+      "blocks": {
+        "col1": {
+          "type": "column",
+          "settings": {
+            "text": "Ministry planning takes more time than most leaders have. Our kits give you a complete, professional plan you can download and use immediately."
+          }
+        },
+        "col2": {
+          "type": "column",
+          "settings": {
+            "text": "Every package is built by experienced ministry leaders who know what actually works in a real church setting with real volunteers and real kids."
+          }
+        },
+        "col3": {
+          "type": "column",
+          "settings": {
+            "text": "We design resources that reduce stress, empower volunteers, and help your team show up confident and prepared for every single event."
+          }
+        }
+      },
+      "block_order": ["col1", "col2", "col3"]
+    },
+    "featured": {
+      "type": "featured-collections",
+      "settings": {
+        "heading": "FEATURED\nKITS",
+        "subheading": "CURATED RESOURCES",
+        "date_range": "2023 — 2025",
+        "view_all_text": "Browse All Kits"
+      },
+      "blocks": {
+        "card1": { "type": "collection_card", "settings": { "label": "YOUTH RETREAT KIT" } },
+        "card2": { "type": "collection_card", "settings": { "label": "WOMEN'S RETREAT KIT" } },
+        "card3": { "type": "collection_card", "settings": { "label": "VBS PLANNING KIT" } }
+      },
+      "block_order": ["card1", "card2", "card3"]
+    },
+    "process": {
+      "type": "process-steps",
+      "settings": {
+        "heading": "HOW IT\nWORKS",
+        "subheading": "From purchase to planning table in three simple steps.",
+        "button_text": "Get Your Kit"
+      },
+      "blocks": {
+        "step1": {
+          "type": "step",
+          "settings": {
+            "title": "Choose Your Kit",
+            "text": "Browse our library of complete planning kits organized by event type, age group, and theme. Find the one that fits your vision and budget."
+          }
+        },
+        "step2": {
+          "type": "step",
+          "settings": {
+            "title": "Download Instantly",
+            "text": "After purchase, your full PDF package downloads immediately. No waiting, no shipping — every document, schedule, and resource lands right in your inbox."
+          }
+        },
+        "step3": {
+          "type": "step",
+          "settings": {
+            "title": "Lead With Confidence",
+            "text": "Open your kit, customize the details for your group, and show up fully prepared. Your team will be amazed at how organized everything looks."
+          }
+        }
+      },
+      "block_order": ["step1", "step2", "step3"]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "JOIN THE COMMUNITY",
+        "heading": "NEW KITS & RESOURCES EVERY MONTH",
+        "subtext": "Get free planning tips, new product announcements, and exclusive discounts sent straight to your inbox.",
+        "placeholder": "YOUR@EMAIL.COM",
+        "button_text": "SUBSCRIBE"
+      }
+    }
+  },
+  "order": ["hero", "manifesto", "featured", "process", "newsletter"]
+}

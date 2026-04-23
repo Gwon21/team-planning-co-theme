@@ -1,0 +1,33 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "color_primary": "#002542",
+    "color_primary_container": "#1B3B5A",
+    "color_secondary": "#725a39",
+    "color_surface": "#fff8f4",
+    "color_surface_container_low": "#fff1e4",
+    "color_surface_container": "#ffebd3",
+    "color_on_surface": "#281801",
+    "color_on_surface_variant": "#43474d",
+    "color_inverse_on_surface": "#ffeedb",
+    "color_outline_variant": "#c3c6ce",
+    "type_header_font": "Epilogue",
+    "type_body_font": "Manrope",
+    "type_base_size": 16,
+    "logo_text": "FAITHFUL OCCASIONS",
+    "logo_max_width": 160,
+    "main_menu": "main-menu",
+    "header_sticky": true,
+    "footer_tagline": "Planning resources for churches and ministry leaders.",
+    "footer_menu": "footer"
+  },
+  "presets": {}
+}

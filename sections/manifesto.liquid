@@ -1,0 +1,192 @@
+<section class="manifesto" {{ section.shopify_attributes }}>
+  <div class="manifesto__inner">
+
+    <!-- Label + Headline Row -->
+    <div class="manifesto__headline-row">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="manifesto__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h2 class="manifesto__heading">
+        {{ section.settings.heading | newline_to_br }}
+        {%- if section.settings.heading_highlight != blank -%}
+          <span class="manifesto__heading-highlight">{{ section.settings.heading_highlight }}</span>
+        {%- endif -%}
+      </h2>
+    </div>
+
+    <!-- Three Columns of Body Text -->
+    <div class="manifesto__columns">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'column' -%}
+            <p class="manifesto__column-text" {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+            </p>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+  </div>
+  <div class="manifesto__border-accent" aria-hidden="true"></div>
+</section>
+
+{% stylesheet %}
+  .manifesto {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-container) 100%);
+    padding: 7rem 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .manifesto__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .manifesto__headline-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .manifesto__headline-row {
+      flex-direction: row;
+      align-items: baseline;
+      gap: 3rem;
+    }
+  }
+
+  .manifesto__eyebrow {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 900;
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-top: 1.5rem;
+  }
+
+  .manifesto__heading {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--color-inverse-on-surface);
+    margin: 0;
+  }
+
+  .manifesto__heading-highlight {
+    display: inline;
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    padding: 0 0.5rem;
+  }
+
+  .manifesto__columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .manifesto__columns {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4rem;
+    }
+  }
+
+  .manifesto__column-text {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 238, 219, 0.75);
+    margin: 0;
+  }
+
+  .manifesto__border-accent {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(197, 156, 99, 0.2);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Manifesto Block",
+  "tag": "section",
+  "class": "shopify-section--manifesto",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "OUR MISSION"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "DONE-FOR-YOU\nIS THE NEW\n"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Highlighted Phrase",
+      "default": "PLANNING."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Body Column",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Column Text",
+          "default": "Ministry planning takes more time than most leaders have. Our kits give you a complete, professional plan you can download and use immediately."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Manifesto Block",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "text": "Ministry planning takes more time than most leaders have. Our kits give you a complete, professional plan you can download and use immediately."
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "text": "Every package is built by experienced ministry leaders who know what actually works in a real church setting with real volunteers and real kids."
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "text": "We design resources that reduce stress, empower volunteers, and help your team show up confident and prepared for every single event."
+          }
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3
+}
+{% endschema %}

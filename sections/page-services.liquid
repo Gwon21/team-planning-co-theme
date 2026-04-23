@@ -1,0 +1,691 @@
+<!-- ============================================================
+   SERVICES PAGE SECTION
+   Planning Services grid + The Blueprint process steps
+   ============================================================ -->
+
+<!-- ---- PLANNING SERVICES GRID ---- -->
+<section class="svc-grid" {{ section.shopify_attributes }}>
+  <div class="svc-grid__inner">
+
+    <!-- Page Header -->
+    <div class="svc-grid__header">
+      <div class="svc-grid__header-left">
+        <h1 class="svc-grid__page-title">{{ section.settings.page_title }}</h1>
+      </div>
+      <div class="svc-grid__header-right">
+        <p class="svc-grid__brand-label">{{ section.settings.brand_label }}</p>
+        <p class="svc-grid__brand-tagline">{{ section.settings.brand_tagline }}</p>
+      </div>
+    </div>
+
+    <div class="svc-grid__divider"></div>
+
+    <!-- 2x2 Service Cards Grid -->
+    <div class="svc-grid__cards">
+
+      <!-- Card 01 -->
+      <div class="svc-card svc-card--light">
+        <div class="svc-card__num-wrap">
+          <span class="svc-card__num">01</span>
+        </div>
+        <div class="svc-card__content">
+          <p class="svc-card__tag">{{ section.settings.card1_tag }}</p>
+          <h2 class="svc-card__title">{{ section.settings.card1_title }}</h2>
+          <p class="svc-card__desc">{{ section.settings.card1_desc }}</p>
+          <p class="svc-card__price">{{ section.settings.card1_price_label }} <strong>{{ section.settings.card1_price }}</strong></p>
+          <a href="{{ section.settings.card1_link }}" class="svc-card__cta">
+            {{ section.settings.card1_cta }} &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 02 -->
+      <div class="svc-card svc-card--warm">
+        <div class="svc-card__num-wrap">
+          <span class="svc-card__num">02</span>
+        </div>
+        <div class="svc-card__content">
+          <p class="svc-card__tag">{{ section.settings.card2_tag }}</p>
+          <h2 class="svc-card__title">{{ section.settings.card2_title }}</h2>
+          <p class="svc-card__desc">{{ section.settings.card2_desc }}</p>
+          <p class="svc-card__price">{{ section.settings.card2_price_label }} <strong>{{ section.settings.card2_price }}</strong></p>
+          <a href="{{ section.settings.card2_link }}" class="svc-card__cta">
+            {{ section.settings.card2_cta }} &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 03 -->
+      <div class="svc-card svc-card--light">
+        <div class="svc-card__num-wrap">
+          <span class="svc-card__num">03</span>
+        </div>
+        <div class="svc-card__content">
+          <p class="svc-card__tag">{{ section.settings.card3_tag }}</p>
+          <h2 class="svc-card__title">{{ section.settings.card3_title }}</h2>
+          <p class="svc-card__desc">{{ section.settings.card3_desc }}</p>
+          <p class="svc-card__price">{{ section.settings.card3_price_label }} <strong>{{ section.settings.card3_price }}</strong></p>
+          <a href="{{ section.settings.card3_link }}" class="svc-card__cta">
+            {{ section.settings.card3_cta }} &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 04 -->
+      <div class="svc-card svc-card--light">
+        <div class="svc-card__num-wrap">
+          <span class="svc-card__num">04</span>
+        </div>
+        <div class="svc-card__content">
+          <p class="svc-card__tag">{{ section.settings.card4_tag }}</p>
+          <h2 class="svc-card__title">{{ section.settings.card4_title }}</h2>
+          <p class="svc-card__desc">{{ section.settings.card4_desc }}</p>
+          <p class="svc-card__price">{{ section.settings.card4_price_label }}</p>
+          <a href="{{ section.settings.card4_link }}" class="svc-card__cta">
+            {{ section.settings.card4_cta }} &rarr;
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /.svc-grid__cards -->
+  </div><!-- /.svc-grid__inner -->
+</section>
+
+<!-- ---- THE BLUEPRINT PROCESS STEPS ---- -->
+<section class="blueprint" id="blueprint">
+  <div class="blueprint__inner">
+
+    <div class="blueprint__left">
+      <h2 class="blueprint__heading">{{ section.settings.bp_heading }}</h2>
+      <p class="blueprint__subtext">{{ section.settings.bp_subtext }}</p>
+    </div>
+
+    <div class="blueprint__steps">
+
+      <div class="blueprint__step">
+        <div class="blueprint__step-num-wrap">
+          <span class="blueprint__step-num">01</span>
+        </div>
+        <div class="blueprint__step-content">
+          <h3 class="blueprint__step-title">{{ section.settings.step1_title }}</h3>
+          <p class="blueprint__step-desc">{{ section.settings.step1_desc }}</p>
+        </div>
+      </div>
+
+      <div class="blueprint__step">
+        <div class="blueprint__step-num-wrap">
+          <span class="blueprint__step-num">02</span>
+        </div>
+        <div class="blueprint__step-content">
+          <h3 class="blueprint__step-title">{{ section.settings.step2_title }}</h3>
+          <p class="blueprint__step-desc">{{ section.settings.step2_desc }}</p>
+        </div>
+      </div>
+
+      <div class="blueprint__step">
+        <div class="blueprint__step-num-wrap">
+          <span class="blueprint__step-num">03</span>
+        </div>
+        <div class="blueprint__step-content">
+          <h3 class="blueprint__step-title">{{ section.settings.step3_title }}</h3>
+          <p class="blueprint__step-desc">{{ section.settings.step3_desc }}</p>
+        </div>
+      </div>
+
+    </div><!-- /.blueprint__steps -->
+  </div><!-- /.blueprint__inner -->
+</section>
+
+{% stylesheet %}
+
+/* =============================================
+   SERVICES GRID
+   ============================================= */
+
+.svc-grid {
+  background-color: var(--color-surface, #fff8f4);
+  padding: 6rem 0 0;
+}
+
+.svc-grid__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Header row */
+.svc-grid__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+
+.svc-grid__page-title {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 900;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: var(--color-primary, #002542);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.svc-grid__header-right {
+  text-align: right;
+  padding-top: 0.5rem;
+}
+
+.svc-grid__brand-label {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-primary, #002542);
+  margin: 0 0 0.25rem;
+}
+
+.svc-grid__brand-tagline {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.85rem;
+  color: var(--color-on-surface-variant, #8a7560);
+  margin: 0;
+  font-style: italic;
+}
+
+.svc-grid__divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 37, 66, 0.15);
+  margin-bottom: 0;
+}
+
+/* Cards grid */
+.svc-grid__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  border-top: 1px solid rgba(0, 37, 66, 0.15);
+}
+
+.svc-card {
+  position: relative;
+  padding: 4rem 3rem;
+  border-bottom: 1px solid rgba(0, 37, 66, 0.12);
+  border-right: 1px solid rgba(0, 37, 66, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 340px;
+}
+
+/* Remove right border on last column */
+.svc-card:nth-child(2n) {
+  border-right: none;
+}
+
+.svc-card--light {
+  background-color: var(--color-surface, #fff8f4);
+}
+
+.svc-card--warm {
+  background-color: var(--color-surface-container, #ffebd3);
+}
+
+.svc-card__num-wrap {
+  position: absolute;
+  top: 2.5rem;
+  right: 2.5rem;
+}
+
+.svc-card__num {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 900;
+  font-size: 4rem;
+  line-height: 1;
+  color: rgba(0, 37, 66, 0.08);
+  letter-spacing: -0.05em;
+}
+
+.svc-card__tag {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-secondary, #725a39);
+  margin: 0 0 1rem;
+}
+
+.svc-card__title {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--color-primary, #002542);
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+}
+
+.svc-card__desc {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--color-on-surface-variant, #8a7560);
+  margin: 0 0 1.5rem;
+  max-width: 340px;
+}
+
+.svc-card__price {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-primary, #002542);
+  margin: 0 0 1.25rem;
+}
+
+.svc-card__price strong {
+  color: var(--color-secondary, #725a39);
+}
+
+.svc-card__cta {
+  display: inline-block;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-primary, #002542);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+  margin-top: auto;
+}
+
+.svc-card__cta:hover {
+  color: var(--color-secondary, #725a39);
+}
+
+/* =============================================
+   THE BLUEPRINT
+   ============================================= */
+
+.blueprint {
+  background-color: var(--color-surface-container, #ffebd3);
+  padding: 7rem 0;
+}
+
+.blueprint__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.blueprint__heading {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 5vw, 5rem);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-primary, #002542);
+  letter-spacing: -0.03em;
+  margin: 0 0 1.25rem;
+}
+
+.blueprint__subtext {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--color-on-surface-variant, #8a7560);
+  margin: 0;
+  max-width: 260px;
+}
+
+.blueprint__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.blueprint__step {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.blueprint__step-num-wrap {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 0.2rem;
+}
+
+.blueprint__step-num {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 900;
+  font-size: 3.5rem;
+  line-height: 1;
+  color: rgba(0, 37, 66, 0.18);
+  letter-spacing: -0.05em;
+}
+
+.blueprint__step-title {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 900;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  color: var(--color-primary, #002542);
+  letter-spacing: -0.01em;
+  margin: 0 0 0.75rem;
+}
+
+.blueprint__step-desc {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-on-surface-variant, #8a7560);
+  margin: 0;
+  max-width: 520px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .svc-grid__cards {
+    grid-template-columns: 1fr;
+  }
+  .svc-card {
+    border-right: none;
+  }
+  .svc-grid__header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .svc-grid__header-right {
+    text-align: left;
+  }
+  .blueprint__inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .blueprint__subtext {
+    max-width: 100%;
+  }
+  .blueprint__step {
+    grid-template-columns: 60px 1fr;
+    gap: 1.5rem;
+  }
+}
+
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Services Page",
+  "tag": "section",
+  "class": "shopify-section--services",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Page Header"
+    },
+    {
+      "type": "text",
+      "id": "page_title",
+      "label": "Page Title",
+      "default": "Planning\nServices"
+    },
+    {
+      "type": "text",
+      "id": "brand_label",
+      "label": "Brand Label",
+      "default": "Professional Services"
+    },
+    {
+      "type": "text",
+      "id": "brand_tagline",
+      "label": "Brand Tagline",
+      "default": "We coordinate. You celebrate."
+    },
+    {
+      "type": "header",
+      "content": "Card 01 — Custom Retreat Planning"
+    },
+    {
+      "type": "text",
+      "id": "card1_tag",
+      "label": "Card Tag",
+      "default": "Most Popular"
+    },
+    {
+      "type": "text",
+      "id": "card1_title",
+      "label": "Card Title",
+      "default": "Custom Retreat Planning"
+    },
+    {
+      "type": "textarea",
+      "id": "card1_desc",
+      "label": "Card Description",
+      "default": "Full-service retreat planning from theme and schedule development to vendor coordination and day-of logistics. We design the experience. You show up and lead."
+    },
+    {
+      "type": "text",
+      "id": "card1_price_label",
+      "label": "Price Label",
+      "default": "Starting at"
+    },
+    {
+      "type": "text",
+      "id": "card1_price",
+      "label": "Price",
+      "default": "$599"
+    },
+    {
+      "type": "url",
+      "id": "card1_link",
+      "label": "Card Link"
+    },
+    {
+      "type": "text",
+      "id": "card1_cta",
+      "label": "CTA Text",
+      "default": "Inquire About This Service"
+    },
+    {
+      "type": "header",
+      "content": "Card 02 — Day-Of Coordination"
+    },
+    {
+      "type": "text",
+      "id": "card2_tag",
+      "label": "Card Tag",
+      "default": "Day-Of Support"
+    },
+    {
+      "type": "text",
+      "id": "card2_title",
+      "label": "Card Title",
+      "default": "Day-Of Coordination"
+    },
+    {
+      "type": "textarea",
+      "id": "card2_desc",
+      "label": "Card Description",
+      "default": "You planned it. We execute it. Our coordinators manage your event timeline, vendors, and setup on the day so you can be fully present with your attendees."
+    },
+    {
+      "type": "text",
+      "id": "card2_price_label",
+      "label": "Price Label",
+      "default": "Starting at"
+    },
+    {
+      "type": "text",
+      "id": "card2_price",
+      "label": "Price",
+      "default": "$299"
+    },
+    {
+      "type": "url",
+      "id": "card2_link",
+      "label": "Card Link"
+    },
+    {
+      "type": "text",
+      "id": "card2_cta",
+      "label": "CTA Text",
+      "default": "Inquire About This Service"
+    },
+    {
+      "type": "header",
+      "content": "Card 03 — Planning Consultation"
+    },
+    {
+      "type": "text",
+      "id": "card3_tag",
+      "label": "Card Tag",
+      "default": "1-on-1 Session"
+    },
+    {
+      "type": "text",
+      "id": "card3_title",
+      "label": "Card Title",
+      "default": "Planning Consultation"
+    },
+    {
+      "type": "textarea",
+      "id": "card3_desc",
+      "label": "Card Description",
+      "default": "A focused one-hour strategy session with our lead planner. Bring your event idea, your challenges, or your timeline. Leave with a clear roadmap and actionable next steps."
+    },
+    {
+      "type": "text",
+      "id": "card3_price_label",
+      "label": "Price Label",
+      "default": "Starting at"
+    },
+    {
+      "type": "text",
+      "id": "card3_price",
+      "label": "Price",
+      "default": "$149"
+    },
+    {
+      "type": "url",
+      "id": "card3_link",
+      "label": "Card Link"
+    },
+    {
+      "type": "text",
+      "id": "card3_cta",
+      "label": "CTA Text",
+      "default": "Book a Session"
+    },
+    {
+      "type": "header",
+      "content": "Card 04 — Full Event Management"
+    },
+    {
+      "type": "text",
+      "id": "card4_tag",
+      "label": "Card Tag",
+      "default": "Full Package"
+    },
+    {
+      "type": "text",
+      "id": "card4_title",
+      "label": "Card Title",
+      "default": "Full Event Management"
+    },
+    {
+      "type": "textarea",
+      "id": "card4_desc",
+      "label": "Card Description",
+      "default": "End-to-end planning and execution for large-scale retreats, corporate conferences, or multi-day events. Venue sourcing, vendor coordination, budget management, and full day-of oversight included."
+    },
+    {
+      "type": "text",
+      "id": "card4_price_label",
+      "label": "Price Label",
+      "default": "Custom Quote"
+    },
+    {
+      "type": "url",
+      "id": "card4_link",
+      "label": "Card Link"
+    },
+    {
+      "type": "text",
+      "id": "card4_cta",
+      "label": "CTA Text",
+      "default": "Get a Custom Quote"
+    },
+    {
+      "type": "header",
+      "content": "The Blueprint — Process Section"
+    },
+    {
+      "type": "text",
+      "id": "bp_heading",
+      "label": "Section Heading",
+      "default": "The Blueprint"
+    },
+    {
+      "type": "textarea",
+      "id": "bp_subtext",
+      "label": "Subtext",
+      "default": "Whether you buy a kit or book a service, our process is simple."
+    },
+    {
+      "type": "text",
+      "id": "step1_title",
+      "label": "Step 1 Title",
+      "default": "Choose Your Path"
+    },
+    {
+      "type": "textarea",
+      "id": "step1_desc",
+      "label": "Step 1 Description",
+      "default": "Decide how you want to work with us. Browse our catalog of ready-to-download planning kits, or book one of our professional event planning services. Both paths lead to a confident, well-run event."
+    },
+    {
+      "type": "text",
+      "id": "step2_title",
+      "label": "Step 2 Title",
+      "default": "Get What You Need"
+    },
+    {
+      "type": "textarea",
+      "id": "step2_desc",
+      "label": "Step 2 Description",
+      "default": "Kit buyers get instant download access to a complete planning package. Service clients get a discovery call, a custom plan, and a dedicated coordinator assigned to their event."
+    },
+    {
+      "type": "text",
+      "id": "step3_title",
+      "label": "Step 3 Title",
+      "default": "Lead with Confidence"
+    },
+    {
+      "type": "textarea",
+      "id": "step3_desc",
+      "label": "Step 3 Description",
+      "default": "Show up fully present for your attendees. Whether you are running the event yourself with our tools or letting our team carry the load, the result is the same: a memorable, well-executed event."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Services Page"
+    }
+  ]
+}
+{% endschema %}

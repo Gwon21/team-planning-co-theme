@@ -1,0 +1,32 @@
+<div class="page-template">
+  <div class="page-template__header">
+    <div class="page-template__header-inner">
+      <h1 class="page-template__title">{{ page.title | upcase }}</h1>
+    </div>
+  </div>
+  <div class="page-template__body">
+    <div class="page-template__body-inner rte">
+      {{ page.content }}
+    </div>
+  </div>
+</div>
+
+<style>
+  .page-template { padding-top: 6rem; }
+  .page-template__header {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-container) 100%);
+    padding: 5rem 0 4rem;
+  }
+  .page-template__header-inner { max-width: 1440px; margin: 0 auto; padding: 0 2rem; }
+  .page-template__title {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    letter-spacing: -0.025em;
+    color: var(--color-inverse-on-surface);
+    margin: 0;
+  }
+  .page-template__body { max-width: 800px; margin: 0 auto; padding: 4rem 2rem; }
+  .page-template__body-inner { font-family: 'Manrope', sans-serif; font-size: 1rem; line-height: 1.75; color: var(--color-on-surface); }
+  .rte h1, .rte h2, .rte h3 { font-family: 'Epilogue', sans-serif; font-weight: 700; color: var(--color-primary); }
+</style>

@@ -1,0 +1,88 @@
+<div class="search-page">
+  <div class="search-page__header">
+    <div class="search-page__header-inner">
+      <h1 class="search-page__title">{{ 'search.title' | t }}</h1>
+      <form action="{{ routes.search_url }}" method="get" class="search-page__form">
+        <input
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          class="search-page__input"
+          placeholder="{{ 'search.placeholder' | t }}"
+        >
+        <button type="submit" class="btn btn--primary">{{ 'search.submit' | t }}</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="search-page__results">
+    <div class="search-page__results-inner">
+      {%- if search.performed -%}
+        {%- if search.results.size > 0 -%}
+          <p class="search-page__count">
+            {{ 'search.results_with_count_plural' | t: count: search.results.size, terms: search.terms }}
+          </p>
+          <div class="search-page__grid">
+            {%- for item in search.results -%}
+              {%- if item.object_type == 'product' -%}
+                <div class="search-product-card">
+                  {% render 'product-card', product: item %}
+                </div>
+              {%- else -%}
+                <div class="search-page-result">
+                  <a href="{{ item.url }}">{{ item.title }}</a>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <p class="search-page__no-results">{{ 'search.no_results' | t: terms: search.terms }}</p>
+          <a class="btn btn--primary" href="{{ routes.collections_url }}">Browse All Kits</a>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .search-page { padding-top: 6rem; }
+  .search-page__header {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-container) 100%);
+    padding: 5rem 0 4rem;
+  }
+  .search-page__header-inner { max-width: 1440px; margin: 0 auto; padding: 0 2rem; }
+  .search-page__title {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    text-transform: uppercase;
+    color: var(--color-inverse-on-surface);
+    margin: 0 0 2rem;
+  }
+  .search-page__form { display: flex; gap: 0; max-width: 600px; }
+  .search-page__input {
+    flex: 1;
+    padding: 1rem 1.25rem;
+    border: 2px solid rgba(255, 238, 219, 0.3);
+    background: rgba(255, 248, 244, 0.1);
+    color: var(--color-inverse-on-surface);
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    border-right: none;
+  }
+  .search-page__input::placeholder { color: rgba(255, 238, 219, 0.4); }
+  .search-page__results-inner { max-width: 1440px; margin: 0 auto; padding: 4rem 2rem; }
+  .search-page__count { font-family: 'Manrope', sans-serif; color: var(--color-on-surface-variant); margin-bottom: 2rem; }
+  .search-page__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+  .search-page__no-results {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-on-surface-variant);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 768px) { .search-page__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 500px) { .search-page__grid { grid-template-columns: 1fr; } }
+</style>

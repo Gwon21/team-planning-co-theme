@@ -1,0 +1,51 @@
+<div class="account-page">
+  <div class="account-page__inner">
+    <div class="account-page__header">
+      <h1 class="account-page__title">{{ 'customer.account.title' | t }}</h1>
+      <a class="btn btn--tertiary" href="{{ routes.account_logout_url }}">{{ 'customer.account.logout' | t }}</a>
+    </div>
+
+    <div class="account-page__grid">
+      <!-- Order History -->
+      <div class="account-section">
+        <h2 class="account-section__title">{{ 'customer.account.orders' | t | upcase }}</h2>
+        {%- if customer.orders.size > 0 -%}
+          {%- for order in customer.orders -%}
+            <div class="order-row">
+              <a class="order-row__number" href="{{ order.customer_url }}">{{ order.name }}</a>
+              <span class="order-row__date">{{ order.created_at | date: '%B %d, %Y' }}</span>
+              <span class="order-row__status">{{ order.financial_status | capitalize }}</span>
+              <span class="order-row__total">{{ order.total_price | money }}</span>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <p class="account-section__empty">You have not placed any orders yet.</p>
+          <a class="btn btn--primary" href="{{ routes.collections_url }}">Browse Kits</a>
+        {%- endif -%}
+      </div>
+
+      <!-- Account Details -->
+      <div class="account-section">
+        <h2 class="account-section__title">{{ 'customer.account.details' | t | upcase }}</h2>
+        <p class="account-detail">{{ customer.name }}</p>
+        <p class="account-detail">{{ customer.email }}</p>
+        <a class="btn btn--tertiary" href="/account/addresses" style="margin-top: 1rem;">Manage Addresses</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .account-page { padding: 8rem 0 5rem; background-color: var(--color-surface); min-height: 80vh; }
+  .account-page__inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .account-page__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
+  .account-page__title { font-family: 'Epilogue', sans-serif; font-weight: 900; font-size: clamp(2rem, 4vw, 3rem); text-transform: uppercase; color: var(--color-primary); margin: 0; }
+  .account-page__grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
+  .account-section__title { font-family: 'Epilogue', sans-serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-secondary); margin: 0 0 1.5rem; }
+  .order-row { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 1rem; align-items: center; padding: 1rem 0; border-bottom: 1px solid rgba(195, 198, 206, 0.3); font-family: 'Manrope', sans-serif; font-size: 0.9rem; }
+  .order-row__number { color: var(--color-primary); font-weight: 700; text-decoration: none; }
+  .order-row__date, .order-row__status, .order-row__total { color: var(--color-on-surface-variant); }
+  .account-section__empty { font-family: 'Manrope', sans-serif; color: var(--color-on-surface-variant); margin-bottom: 1.5rem; }
+  .account-detail { font-family: 'Manrope', sans-serif; font-size: 0.95rem; color: var(--color-on-surface); margin: 0 0 0.5rem; }
+  @media (max-width: 768px) { .account-page__grid { grid-template-columns: 1fr; } }
+</style>

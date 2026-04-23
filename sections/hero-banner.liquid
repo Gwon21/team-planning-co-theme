@@ -1,0 +1,318 @@
+<header class="hero-banner" {{ section.shopify_attributes }}>
+
+  <!-- Decorative Background Panel -->
+  <div class="hero-banner__bg-panel" aria-hidden="true"></div>
+
+  <div class="hero-banner__inner">
+
+    <!-- Left Content -->
+    <div class="hero-banner__content">
+
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="hero-banner__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+
+      <h1 class="hero-banner__heading">
+        {{ section.settings.heading | newline_to_br }}
+        {%- if section.settings.heading_accent != blank -%}
+          <span class="hero-banner__heading-accent">{{ section.settings.heading_accent }}</span>
+        {%- endif -%}
+      </h1>
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="hero-banner__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      <div class="hero-banner__cta-row">
+        <div class="hero-banner__rule" aria-hidden="true"></div>
+        {%- if section.settings.button_text != blank -%}
+          <a class="btn btn--primary" href="{{ section.settings.button_link | default: routes.collections_url }}">
+            {{ section.settings.button_text | upcase }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.button_secondary_text != blank -%}
+          <a class="btn btn--tertiary" href="{{ section.settings.button_secondary_link | default: '#' }}">
+            {{ section.settings.button_secondary_text | upcase }}
+          </a>
+        {%- endif -%}
+      </div>
+
+    </div>
+
+    <!-- Right Image -->
+    <div class="hero-banner__image-wrap">
+      <div class="hero-banner__image-frame">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 900 }}"
+            alt="{{ section.settings.image.alt | escape | default: section.settings.heading }}"
+            loading="eager"
+            width="900"
+          >
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'hero-banner__placeholder' }}
+        {%- endif -%}
+      </div>
+
+      <!-- Offset Block -->
+      <div class="hero-banner__offset-block" aria-hidden="true">
+        {%- if section.settings.offset_label != blank -%}
+          <span class="hero-banner__offset-label">{{ section.settings.offset_label }}</span>
+        {%- endif -%}
+        {%- if section.settings.offset_value != blank -%}
+          <span class="hero-banner__offset-value">{{ section.settings.offset_value }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+
+  </div>
+</header>
+
+{% stylesheet %}
+  .hero-banner {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 6rem;
+    overflow: hidden;
+    background-color: var(--color-surface);
+  }
+
+  .hero-banner__bg-panel {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 33%;
+    height: 100%;
+    background-color: var(--color-surface-container-low);
+    z-index: 0;
+  }
+
+  .hero-banner__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 4rem 2rem;
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-banner__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .hero-banner__eyebrow {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    display: block;
+  }
+
+  .hero-banner__heading {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  .hero-banner__heading-accent {
+    display: block;
+    color: var(--color-secondary);
+    font-style: italic;
+  }
+
+  .hero-banner__subheading {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--color-on-surface-variant);
+    max-width: 480px;
+    margin: 0;
+  }
+
+  .hero-banner__cta-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .hero-banner__rule {
+    width: 5rem;
+    height: 2px;
+    background-color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .hero-banner__image-wrap {
+    position: relative;
+  }
+
+  .hero-banner__image-frame {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background-color: var(--color-surface-container-low);
+  }
+
+  .hero-banner__image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.7s ease;
+    filter: contrast(1.1);
+  }
+
+  .hero-banner__image-frame img:hover {
+    filter: contrast(1);
+  }
+
+  .hero-banner__placeholder {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-banner__offset-block {
+    position: absolute;
+    bottom: -3rem;
+    left: -3rem;
+    width: 12rem;
+    height: 12rem;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-container) 100%);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .hero-banner__offset-label {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 900;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-inverse-on-surface);
+    opacity: 0.6;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-banner__offset-value {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 900;
+    font-size: 1.75rem;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--color-inverse-on-surface);
+    display: block;
+  }
+
+  @media (max-width: 900px) {
+    .hero-banner__inner {
+      grid-template-columns: 1fr;
+      padding: 3rem 1.25rem;
+    }
+    .hero-banner__bg-panel { width: 50%; }
+    .hero-banner__image-wrap { margin-top: 2rem; }
+    .hero-banner__offset-block { left: -1rem; bottom: -2rem; width: 9rem; height: 9rem; }
+  }
+
+  @media (max-width: 600px) {
+    .hero-banner { padding-top: 5rem; }
+    .hero-banner__offset-block { display: none; }
+    .hero-banner__bg-panel { display: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "tag": "div",
+  "class": "shopify-section--hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "DIGITAL PLANNING RESOURCES"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "PLAN THE\nUNFORGETTABLE"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Accent Word (italic, different color)",
+      "default": "RETREAT."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Complete downloadable planning kits for youth retreats, women's gatherings, VBS programs, and church events. Ready to use in minutes."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Primary Button Text",
+      "default": "Browse All Kits"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_secondary_text",
+      "label": "Secondary Button Text",
+      "default": "See What's Included"
+    },
+    {
+      "type": "url",
+      "id": "button_secondary_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "offset_label",
+      "label": "Offset Block Label",
+      "default": "EST."
+    },
+    {
+      "type": "text",
+      "id": "offset_value",
+      "label": "Offset Block Value",
+      "default": "2022"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}

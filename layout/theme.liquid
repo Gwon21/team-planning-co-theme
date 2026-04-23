@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#002542">
+
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif -%}
+    {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
+
+  {{ content_for_header }}
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800;900&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <!-- Theme CSS -->
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  <!-- Theme Settings as CSS Variables -->
+  <style>
+    :root {
+      --color-primary: {{ settings.color_primary }};
+      --color-primary-container: {{ settings.color_primary_container }};
+      --color-secondary: {{ settings.color_secondary }};
+      --color-surface: {{ settings.color_surface }};
+      --color-surface-container-low: {{ settings.color_surface_container_low }};
+      --color-surface-container: {{ settings.color_surface_container }};
+      --color-inverse-on-surface: {{ settings.color_inverse_on_surface }};
+      --color-on-surface: {{ settings.color_on_surface }};
+      --color-on-surface-variant: {{ settings.color_on_surface_variant }};
+      --color-outline-variant: {{ settings.color_outline_variant }};
+      --font-size-base: {{ settings.type_base_size }}px;
+      --logo-max-width: {{ settings.logo_max_width }}px;
+    }
+  </style>
+</head>
+
+<body class="template-{{ request.page_type }}{% if request.design_mode %} shopify-design-mode{% endif %}">
+
+  <a class="skip-link" href="#MainContent">{{ 'accessibility.skip_to_content' | t }}</a>
+
+  {% section 'header' %}
+
+  <main id="MainContent" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  <!-- Cart Drawer Overlay -->
+  <div class="cart-overlay" id="cart-overlay" aria-hidden="true"></div>
+
+  <!-- Theme JS -->
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+</body>
+</html>
