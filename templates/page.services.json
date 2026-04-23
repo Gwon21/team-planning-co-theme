@@ -12,7 +12,7 @@
     "services": {
       "type": "page-services",
       "settings": {
-        "page_title": "Planning\nServices",
+        "page_title": "PlanningServices",
         "brand_label": "Professional Services",
         "brand_tagline": "We coordinate. You celebrate.",
         "card1_tag": "Most Popular",
@@ -20,23 +20,27 @@
         "card1_desc": "Full-service retreat planning from theme and schedule development to vendor coordination and day-of logistics. We design the experience. You show up and lead.",
         "card1_price_label": "Starting at",
         "card1_price": "$599",
+        "card1_link": "shopify://pages/contact",
         "card1_cta": "Inquire About This Service",
         "card2_tag": "Day-Of Support",
         "card2_title": "Day-Of Coordination",
         "card2_desc": "You planned it. We execute it. Our coordinators manage your event timeline, vendors, and setup on the day so you can be fully present with your attendees.",
         "card2_price_label": "Starting at",
         "card2_price": "$299",
+        "card2_link": "shopify://pages/contact",
         "card2_cta": "Inquire About This Service",
         "card3_tag": "1-on-1 Session",
         "card3_title": "Planning Consultation",
         "card3_desc": "A focused one-hour strategy session with our lead planner. Bring your event idea, your challenges, or your timeline. Leave with a clear roadmap and actionable next steps.",
         "card3_price_label": "Starting at",
         "card3_price": "$149",
+        "card3_link": "shopify://pages/contact",
         "card3_cta": "Book a Session",
         "card4_tag": "Full Package",
         "card4_title": "Full Event Management",
         "card4_desc": "End-to-end planning and execution for large-scale retreats, corporate conferences, or multi-day events. Venue sourcing, vendor coordination, budget management, and full day-of oversight included.",
         "card4_price_label": "Custom Quote",
+        "card4_link": "shopify://pages/contact",
         "card4_cta": "Get a Custom Quote",
         "bp_heading": "The Blueprint",
         "bp_subtext": "Whether you buy a kit or book a service, our process is simple.",
@@ -49,5 +53,7 @@
       }
     }
   },
-  "order": ["services"]
+  "order": [
+    "services"
+  ]
 }
