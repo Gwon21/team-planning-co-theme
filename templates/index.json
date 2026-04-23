@@ -12,16 +12,16 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
-        "eyebrow": "DIGITAL PLANNING RESOURCES",
+        "eyebrow": "DIGITAL PLANNING RESOURCES and event planning",
         "heading": "PLAN THE\nUNFORGETTABLE",
-        "heading_accent": "RETREAT.",
+        "heading_accent": "Event.",
         "subheading": "Complete downloadable planning kits for youth retreats, women's gatherings, VBS programs, and church events. Ready to use in minutes.",
         "button_text": "Browse All Kits",
-        "button_link": "",
+        "button_link": "shopify://collections/all",
         "button_secondary_text": "See What's Included",
         "button_secondary_link": "",
         "offset_label": "EST.",
-        "offset_value": "2022"
+        "offset_value": "2026"
       }
     },
     "manifesto": {
@@ -30,7 +30,7 @@
         "col1": {
           "type": "column",
           "settings": {
-            "text": "Ministry planning takes more time than most leaders have. Our kits give you a complete, professional plan you can download and use immediately."
+            "text": "Event planning takes more time than most leaders have. Our kits give you a complete, professional plan you can download and use immediately."
           }
         },
         "col2": {
@@ -88,7 +88,7 @@
         "card3"
       ],
       "settings": {
-        "heading": "FEATUREDKITS",
+        "heading": "FEATURED KITS",
         "subheading": "CURATED RESOURCES",
         "date_range": "2026",
         "view_all_text": "Browse All Kits",
