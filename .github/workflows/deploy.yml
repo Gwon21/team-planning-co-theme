@@ -1,29 +1,29 @@
 name: Deploy Shopify Theme
-
 on:
   push:
     branches:
       - main
       - staging
       - dev
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - name: Install Shopify CLI
-        run: npm install -g @shopify/cli @shopify/theme
-
+        run: npm install -g @shopify/cli
       - name: Deploy to Live (main)
         if: github.ref == 'refs/heads/main'
-        run: shopify theme push --theme ${{ secrets.LIVE_THEME_ID }} --store ${{ secrets.SHOPIFY_STORE }} --password ${{ secrets.SHOPIFY_THEME_TOKEN }} --allow-live
-
+        env:
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_THEME_TOKEN }}
+        run: shopify theme push --theme ${{ secrets.LIVE_THEME_ID }} --store ${{ secrets.SHOPIFY_STORE }} --allow-live
       - name: Deploy to Staging
         if: github.ref == 'refs/heads/staging'
-        run: shopify theme push --theme ${{ secrets.STAGING_THEME_ID }} --store ${{ secrets.SHOPIFY_STORE }} --password ${{ secrets.SHOPIFY_THEME_TOKEN }}
-
+        env:
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_THEME_TOKEN }}
+        run: shopify theme push --theme ${{ secrets.STAGING_THEME_ID }} --store ${{ secrets.SHOPIFY_STORE }}
       - name: Deploy to Dev
         if: github.ref == 'refs/heads/dev'
-        run: shopify theme push --theme ${{ secrets.DEV_THEME_ID }} --store ${{ secrets.SHOPIFY_STORE }} --password ${{ secrets.SHOPIFY_THEME_TOKEN }}
+        env:
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_THEME_TOKEN }}
+        run: shopify theme push --theme ${{ secrets.DEV_THEME_ID }} --store ${{ secrets.SHOPIFY_STORE }}
