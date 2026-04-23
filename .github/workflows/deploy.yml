@@ -18,12 +18,12 @@ jobs:
 
       - name: Deploy to Live (main)
         if: github.ref == 'refs/heads/main'
-        run: shopify theme push --theme-id ${{ secrets.LIVE_THEME_ID }} --store ${{ secrets.SHOPIFY_STORE }} --password ${{ secrets.SHOPIFY_THEME_TOKEN }} --allow-live
+        run: shopify theme push --theme ${{ secrets.LIVE_THEME_ID }} --store ${{ secrets.SHOPIFY_STORE }} --password ${{ secrets.SHOPIFY_THEME_TOKEN }} --allow-live
 
       - name: Deploy to Staging
         if: github.ref == 'refs/heads/staging'
-        run: shopify theme push --theme-id ${{ secrets.STAGING_THEME_ID }} --store ${{ secrets.SHOPIFY_STORE }} --password ${{ secrets.SHOPIFY_THEME_TOKEN }}
+        run: shopify theme push --theme ${{ secrets.STAGING_THEME_ID }} --store ${{ secrets.SHOPIFY_STORE }} --password ${{ secrets.SHOPIFY_THEME_TOKEN }}
 
       - name: Deploy to Dev
         if: github.ref == 'refs/heads/dev'
-        run: shopify theme push --theme-id ${{ secrets.DEV_THEME_ID }} --store ${{ secrets.SHOPIFY_STORE }} --password ${{ secrets.SHOPIFY_THEME_TOKEN }}
+        run: shopify theme push --theme ${{ secrets.DEV_THEME_ID }} --store ${{ secrets.SHOPIFY_STORE }} --password ${{ secrets.SHOPIFY_THEME_TOKEN }}
