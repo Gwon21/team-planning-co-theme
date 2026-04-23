@@ -33,6 +33,7 @@
 
     <!-- RIGHT COLUMN — CONTACT FORM -->
     <div class="contact-section__right">
+      <div class="contact-card">
       {% form 'contact', id: 'ContactForm', class: 'contact-form' %}
 
         {{ form.errors | default_errors }}
@@ -123,6 +124,7 @@
         </button>
 
       {% endform %}
+      </div><!-- /.contact-card -->
     </div>
 
   </div>
@@ -140,13 +142,13 @@
 }
 
 .contact-section__inner {
-  max-width: 1440px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 0 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6rem;
-  align-items: start;
+  gap: 5rem;
+  align-items: center;
 }
 
 /* --- Left Column --- */
@@ -199,12 +201,19 @@
   flex-shrink: 0;
 }
 
-/* --- Right Column — Form --- */
+/* --- Right Column — White Card --- */
+
+.contact-card {
+  background: #ffffff;
+  padding: 3rem 3.5rem 3.5rem;
+  box-shadow: 0 4px 32px rgba(0, 37, 66, 0.08), 0 1px 4px rgba(0, 37, 66, 0.06);
+  border-top: 3px solid var(--color-primary, #002542);
+}
 
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 2.25rem;
+  gap: 2rem;
 }
 
 .contact-form__field {
@@ -228,7 +237,7 @@
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(0, 37, 66, 0.25);
+  border-bottom: 1px solid rgba(0, 37, 66, 0.18);
   padding: 0.75rem 0;
   font-family: 'Manrope', sans-serif;
   font-size: 0.9rem;
@@ -316,7 +325,7 @@
 @media (max-width: 900px) {
   .contact-section__inner {
     grid-template-columns: 1fr;
-    gap: 3.5rem;
+    gap: 3rem;
   }
 
   .contact-section {
@@ -335,6 +344,10 @@
 
   .contact-section__inner {
     padding: 0 1.25rem;
+  }
+
+  .contact-card {
+    padding: 2rem 1.5rem 2.5rem;
   }
 }
 
