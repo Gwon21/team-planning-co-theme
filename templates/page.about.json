@@ -18,8 +18,11 @@
         "location": "Triangle, North Carolina",
         "experience": "Nearly 2 Years in Church & Event Planning",
         "specialty": "Church Events, Youth Retreats & Ministry Coordination",
+        "photo_1": "shopify://shop_images/IMG_1977_1.jpg",
         "photo_1_alt": "Jiwon Chon — Event Planner",
+        "photo_1_caption": "2025 Retreat",
         "photo_2_alt": "Jiwon Chon — In Action",
+        "photo_2_caption": "",
         "bio_text": "<p>I'm Jiwon, a church event planner and project manager based in the Triangle, NC. Over the past two years, I've had the privilege of helping churches, youth ministries, and faith-based organizations plan and execute events that their communities still talk about.</p><p>What started as a passion for serving my local church quickly grew into a calling. I've learned that a well-planned retreat or ministry event doesn't just run smoothly — it creates space for real connection, growth, and transformation. That's what drives everything I build.</p><p>As the founder of Team Planning Co., I combine my planning experience with a deep understanding of what church leaders actually need: practical tools they can use immediately, without having to start from scratch. Whether you're downloading a kit or booking a service, my goal is the same — to take the planning off your plate so you can show up fully for your people.</p>",
         "skills_heading": "What I Bring to the Table",
         "skills_subtext": "A blend of ministry knowledge, project management discipline, and real-world event experience.",
@@ -36,9 +39,12 @@
         "skill_6_title": "Digital Product Creation",
         "skill_6_desc": "Building done-for-you planning kits that organizers can download, customize, and use immediately — no design or planning experience required.",
         "cta_text": "Ready to plan your next event together?",
-        "cta_button": "Work With Me"
+        "cta_button": "Work With Me",
+        "cta_link": ""
       }
     }
   },
-  "order": ["about"]
+  "order": [
+    "about"
+  ]
 }
