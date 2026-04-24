@@ -12,7 +12,7 @@
     "services": {
       "type": "page-services",
       "settings": {
-        "page_title": "PlanningServices",
+        "page_title": "Planning Services",
         "brand_label": "Professional Services",
         "brand_tagline": "We coordinate. You celebrate.",
         "card1_tag": "Most Popular",
