@@ -1,72 +1,100 @@
 /**
  * Team Planning Co. — Theme JavaScript
- * Handles: mobile menu, quantity selectors, cart interactions
  *
- * Mobile improvements:
- * - Animated hamburger / X icon toggle
- * - Body scroll lock when mobile menu is open
- * - Close menu on outside tap, Escape key, nav link click, and resize
- * - Smooth image gallery transitions
+ * Mobile improvements in this version:
+ * - Measures real header height and sets --header-height CSS variable
+ *   so every page clears the sticky header automatically
+ * - Full-screen slide-in overlay mobile menu (replaces old dropdown)
+ * - Body scroll lock when mobile nav is open
+ * - Close on backdrop tap, Escape key, nav link click, and resize to desktop
+ * - Animated hamburger lines → X (pure CSS, driven by aria-expanded)
+ * - Smooth product image gallery transitions
  */
 
 (function () {
   'use strict';
 
-  /* ---- Mobile Menu ---- */
+  /* ============================================================
+     HEADER HEIGHT — measure and expose as CSS custom property
+     This runs immediately and on every resize so padding-top
+     on <main> stays accurate for all viewport sizes.
+     ============================================================ */
+  function initHeaderHeight() {
+    var header = document.querySelector('.site-header');
+    var main = document.querySelector('main');
+    if (!header) return;
+
+    function setHeight() {
+      var h = header.offsetHeight;
+      document.documentElement.style.setProperty('--header-height', h + 'px');
+      // Also set directly on main as a fallback for browsers that
+      // don't process CSS custom properties on the fly
+      if (main) main.style.paddingTop = h + 'px';
+    }
+
+    setHeight();
+
+    // Re-measure on resize (font size, orientation, etc. can change header height)
+    window.addEventListener('resize', setHeight, { passive: true });
+  }
+
+  /* ============================================================
+     FULL-SCREEN MOBILE NAV OVERLAY
+     ============================================================ */
   function initMobileMenu() {
-    const toggle = document.querySelector('[data-action="toggle-mobile-menu"]');
-    const nav = document.getElementById('mobile-nav');
-    if (!toggle || !nav) return;
+    var toggle = document.querySelector('[data-action="toggle-mobile-menu"]');
+    var overlay = document.getElementById('mobile-nav-overlay');
+    var backdrop = document.getElementById('mobile-nav-backdrop');
+    if (!toggle || !overlay) return;
 
     function openMenu() {
-      nav.classList.add('is-open');
-      nav.setAttribute('aria-hidden', 'false');
+      overlay.classList.add('is-open');
+      overlay.setAttribute('aria-hidden', 'false');
       toggle.setAttribute('aria-expanded', 'true');
-      // Lock body scroll so the page doesn't scroll behind the drawer
+      if (backdrop) backdrop.classList.add('is-visible');
+      // Lock body scroll — prevent page scrolling behind the overlay
       document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
     }
 
     function closeMenu() {
-      nav.classList.remove('is-open');
-      nav.setAttribute('aria-hidden', 'true');
+      overlay.classList.remove('is-open');
+      overlay.setAttribute('aria-hidden', 'true');
       toggle.setAttribute('aria-expanded', 'false');
+      if (backdrop) backdrop.classList.remove('is-visible');
       // Restore body scroll
       document.body.style.overflow = '';
+      document.body.style.touchAction = '';
     }
 
     function isOpen() {
-      return nav.classList.contains('is-open');
+      return overlay.classList.contains('is-open');
     }
 
-    // Toggle on hamburger click
+    // Hamburger toggle
     toggle.addEventListener('click', function () {
       isOpen() ? closeMenu() : openMenu();
     });
 
-    // Close when a nav link is tapped (prevents sticky-open drawer on SPA navigation)
-    nav.querySelectorAll('.mobile-nav__link').forEach(function (link) {
+    // Close when any nav link is tapped
+    overlay.querySelectorAll('.mobile-nav-overlay__link').forEach(function (link) {
       link.addEventListener('click', closeMenu);
     });
 
+    // Close on backdrop tap
+    if (backdrop) {
+      backdrop.addEventListener('click', closeMenu);
+    }
+
     // Close on Escape key
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && isOpen()) {
+      if ((e.key === 'Escape' || e.key === 'Esc') && isOpen()) {
         closeMenu();
-        toggle.focus(); // return focus to toggle for accessibility
+        toggle.focus();
       }
     });
 
-    // Close on outside tap/click (touching the page behind the drawer)
-    document.addEventListener('click', function (e) {
-      if (!isOpen()) return;
-      // If the click is outside the header entirely, close
-      const header = document.querySelector('.site-header');
-      if (header && !header.contains(e.target)) {
-        closeMenu();
-      }
-    });
-
-    // Close if window resizes back to desktop width (avoids hidden-but-locked state)
+    // Auto-close if window grows past mobile breakpoint (avoids locked scroll on rotate)
     window.addEventListener('resize', function () {
       if (window.innerWidth > 768 && isOpen()) {
         closeMenu();
@@ -74,17 +102,19 @@
     }, { passive: true });
   }
 
-  /* ---- Quantity Selectors ---- */
+  /* ============================================================
+     QUANTITY SELECTORS (product page)
+     ============================================================ */
   function initQuantitySelectors() {
     document.addEventListener('click', function (e) {
-      const btn = e.target.closest('[data-action="increase"], [data-action="decrease"]');
+      var btn = e.target.closest('[data-action="increase"], [data-action="decrease"]');
       if (!btn) return;
-      const wrap = btn.closest('.product-detail__qty');
+      var wrap = btn.closest('.product-detail__qty');
       if (!wrap) return;
-      const input = wrap.querySelector('.qty-input');
+      var input = wrap.querySelector('.qty-input');
       if (!input) return;
 
-      const current = parseInt(input.value, 10) || 1;
+      var current = parseInt(input.value, 10) || 1;
       if (btn.dataset.action === 'increase') {
         input.value = current + 1;
       } else if (btn.dataset.action === 'decrease' && current > 1) {
@@ -93,14 +123,15 @@
     });
   }
 
-  /* ---- Sticky Header Class ---- */
+  /* ============================================================
+     STICKY HEADER — add scrolled class for optional styling
+     ============================================================ */
   function initStickyHeader() {
-    const header = document.querySelector('.site-header');
+    var header = document.querySelector('.site-header');
     if (!header) return;
 
     window.addEventListener('scroll', function () {
-      const currentScroll = window.pageYOffset;
-      if (currentScroll > 80) {
+      if (window.pageYOffset > 60) {
         header.classList.add('site-header--scrolled');
       } else {
         header.classList.remove('site-header--scrolled');
@@ -108,24 +139,29 @@
     }, { passive: true });
   }
 
-  /* ---- Smooth Scroll for Anchor Links ---- */
+  /* ============================================================
+     SMOOTH SCROLL for anchor links
+     ============================================================ */
   function initSmoothScroll() {
     document.addEventListener('click', function (e) {
-      const link = e.target.closest('a[href^="#"]');
+      var link = e.target.closest('a[href^="#"]');
       if (!link) return;
-      const target = document.querySelector(link.getAttribute('href'));
+      var target = document.querySelector(link.getAttribute('href'));
       if (!target) return;
       e.preventDefault();
-      const headerHeight = document.querySelector('.site-header')?.offsetHeight || 80;
-      const top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 24;
-      window.scrollTo({ top, behavior: 'smooth' });
+      var headerEl = document.querySelector('.site-header');
+      var headerHeight = headerEl ? headerEl.offsetHeight : 80;
+      var top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 24;
+      window.scrollTo({ top: top, behavior: 'smooth' });
     });
   }
 
-  /* ---- Image Gallery (Product Page) ---- */
+  /* ============================================================
+     PRODUCT IMAGE GALLERY
+     ============================================================ */
   function initProductGallery() {
-    const thumbs = document.querySelectorAll('.product-detail__thumb');
-    const mainImg = document.getElementById('ProductMainImage');
+    var thumbs = document.querySelectorAll('.product-detail__thumb');
+    var mainImg = document.getElementById('ProductMainImage');
     if (!mainImg || !thumbs.length) return;
 
     function setActiveThumb(activeThumb) {
@@ -136,26 +172,35 @@
     thumbs.forEach(function (thumb) {
       thumb.addEventListener('click', function () {
         setActiveThumb(thumb);
-        const src = thumb.querySelector('img')?.src;
-        if (src) {
-          mainImg.style.opacity = '0';
-          mainImg.style.transition = 'opacity 0.2s ease';
-          setTimeout(function () {
-            // Swap to the high-res version by replacing the thumbnail size
-            mainImg.src = src.replace(/_150x(\.[a-z]+)$/, '_900x$1').replace(/width=150/, 'width=900');
-            mainImg.style.opacity = '1';
-          }, 200);
-        }
+        var thumbImg = thumb.querySelector('img');
+        if (!thumbImg) return;
+        // Build the high-res src from the thumbnail src
+        var src = thumbImg.src
+          .replace(/_150x(\.[a-z]+)(\?|$)/, '_900x$1$2')
+          .replace(/width=150/, 'width=900');
+        mainImg.style.opacity = '0';
+        mainImg.style.transition = 'opacity 0.2s ease';
+        setTimeout(function () {
+          mainImg.src = src;
+          mainImg.style.opacity = '1';
+        }, 200);
       });
     });
 
-    // Set first thumb as active on load
-    if (thumbs.length) {
-      thumbs[0].style.opacity = '1';
-    }
+    // Mark first thumb as active
+    if (thumbs[0]) thumbs[0].style.opacity = '1';
   }
 
-  /* ---- Initialize All ---- */
+  /* ============================================================
+     INITIALIZE
+     ============================================================ */
+  // Header height runs ASAP (before DOMContentLoaded if possible)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeaderHeight);
+  } else {
+    initHeaderHeight();
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initMobileMenu();
     initQuantitySelectors();

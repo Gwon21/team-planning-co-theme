@@ -30,15 +30,17 @@ body {
   overflow-x: hidden;
 }
 
-/* Page offset for sticky header */
-.template-index main,
-.template-collection main,
-.template-product main,
-.template-page main,
-.template-blog main,
-.template-article main,
-.template-search main {
-  padding-top: 0;
+/* --- Header Height Compensation ---
+   --header-height is set precisely by JS (initHeaderHeight in theme.js).
+   Applying it to <main> clears the sticky header on every page automatically.
+   Fallback values keep things safe if JS hasn't run yet.
+*/
+:root {
+  --header-height: 78px; /* JS will override with measured value */
+}
+
+main {
+  padding-top: var(--header-height);
 }
 
 /* --- Typography --- */
@@ -347,6 +349,7 @@ select {
   }
 
   :root {
+    --header-height: 60px; /* Mobile fallback — JS will measure the real value */
     --space-8: 3rem;
     --space-12: 4rem;
     --space-16: 5rem;
