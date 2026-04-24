@@ -1,0 +1,367 @@
+<nav class="site-header{% if section.settings.sticky_header %} site-header--sticky{% endif %}" role="navigation" aria-label="Main Navigation">
+  <div class="site-header__inner">
+
+    <!-- Logo -->
+    <a class="site-header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+      {%- if settings.logo != blank -%}
+        <img
+          src="{{ settings.logo | image_url: width: 320 }}"
+          alt="{{ shop.name }}"
+          width="{{ settings.logo_max_width }}"
+          loading="eager"
+        >
+      {%- else -%}
+        <span class="site-header__logo-text">{{ settings.logo_text | default: shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <!-- Desktop Navigation -->
+    <div class="site-header__nav hide-mobile" aria-label="Main menu">
+      {%- if section.settings.menu != blank -%}
+        {%- assign menu = linklists[section.settings.menu] -%}
+        {%- for link in menu.links -%}
+          <a
+            class="site-header__nav-link{% if link.active %} active{% endif %}"
+            href="{{ link.url }}"
+            {% if link.current %}aria-current="page"{% endif %}
+          >
+            {{ link.title | upcase }}
+          </a>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    <!-- Header Actions -->
+    <div class="site-header__actions">
+
+      <!-- Contact Button -->
+      <a
+        class="site-header__contact-btn hide-mobile"
+        href="{{ section.settings.contact_url }}"
+      >
+        {{ section.settings.contact_label }}
+      </a>
+
+      <!-- Search -->
+      <button
+        class="site-header__icon-btn"
+        aria-label="{{ 'sections.header.search' | t }}"
+        data-action="open-search"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+
+      <!-- Cart -->
+      <a
+        class="site-header__icon-btn site-header__cart-btn"
+        href="{{ routes.cart_url }}"
+        aria-label="{{ 'sections.header.cart' | t: count: cart.item_count }}"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        {%- if cart.item_count > 0 -%}
+          <span class="cart-count" aria-hidden="true">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+
+      <!-- Mobile Menu Toggle — animated hamburger / X -->
+      <button
+        class="site-header__icon-btn site-header__mobile-toggle show-mobile"
+        aria-label="{{ 'accessibility.open_menu' | t }}"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        data-action="toggle-mobile-menu"
+      >
+        <!-- Hamburger icon (shown when closed) -->
+        <svg class="icon-burger" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+        <!-- X icon (shown when open) -->
+        <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav show-mobile" id="mobile-nav" aria-hidden="true">
+    {%- if section.settings.menu != blank -%}
+      {%- assign menu = linklists[section.settings.menu] -%}
+      {%- for link in menu.links -%}
+        <a
+          class="mobile-nav__link{% if link.active %} active{% endif %}"
+          href="{{ link.url }}"
+        >
+          {{ link.title | upcase }}
+        </a>
+      {%- endfor -%}
+    {%- endif -%}
+    <a href="{{ routes.cart_url }}" class="mobile-nav__link">
+      CART {% if cart.item_count > 0 %}({{ cart.item_count }}){% endif %}
+    </a>
+  </div>
+</nav>
+
+{% stylesheet %}
+  .site-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: rgba(255, 248, 244, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 4px 32px 0 rgba(40, 24, 1, 0.06);
+    transition: background-color 0.3s ease;
+  }
+
+  .site-header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 2rem;
+    max-width: 1440px;
+    margin: 0 auto;
+    gap: 2rem;
+  }
+
+  .site-header__logo {
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .site-header__logo img {
+    max-width: var(--logo-max-width, 160px);
+    height: auto;
+    display: block;
+  }
+
+  .site-header__logo-text {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 900;
+    font-size: 1.25rem;
+    letter-spacing: -0.03em;
+    color: var(--color-primary);
+    text-transform: uppercase;
+  }
+
+  .site-header__nav {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .site-header__nav-link {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .site-header__nav-link:hover,
+  .site-header__nav-link.active {
+    color: var(--color-primary);
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .site-header__contact-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary, #002542);
+    color: #ffffff;
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.55rem 1.25rem;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+    border-radius: 0 !important;
+  }
+
+  .site-header__contact-btn:hover {
+    opacity: 0.82;
+  }
+
+  .site-header__icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-primary);
+    padding: 0.25rem;
+    position: relative;
+    transition: opacity 0.2s ease;
+    /* Minimum touch target */
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .site-header__icon-btn:hover {
+    opacity: 0.7;
+  }
+
+  .cart-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background-color: var(--color-secondary);
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 0.65rem;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* --- Animated burger / X icons --- */
+  .icon-burger,
+  .icon-close {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    position: absolute;
+  }
+
+  /* Default: show burger, hide X */
+  .icon-close {
+    opacity: 0;
+    transform: rotate(-45deg) scale(0.8);
+  }
+
+  .icon-burger {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+
+  /* When menu is open: show X, hide burger */
+  .site-header__mobile-toggle[aria-expanded="true"] .icon-burger {
+    opacity: 0;
+    transform: rotate(45deg) scale(0.8);
+  }
+
+  .site-header__mobile-toggle[aria-expanded="true"] .icon-close {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+
+  /* --- Mobile Navigation Drawer --- */
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    background-color: var(--color-primary);
+    padding: 0 2rem;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+  }
+
+  .mobile-nav.is-open {
+    max-height: 600px;
+    padding: 1.5rem 2rem 2rem;
+  }
+
+  .mobile-nav__link {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-inverse-on-surface);
+    text-decoration: none;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid rgba(255, 238, 219, 0.1);
+    transition: color 0.2s ease;
+    /* Ensure touch-friendly tap area */
+    display: block;
+    min-height: 44px;
+  }
+
+  .mobile-nav__link:hover,
+  .mobile-nav__link.active {
+    color: var(--color-secondary);
+  }
+
+  /* --- Responsive visibility helpers --- */
+  @media (max-width: 768px) {
+    .hide-mobile { display: none !important; }
+    .show-mobile { display: flex !important; }
+    .mobile-nav { display: flex; }
+    .site-header__inner { padding: 0.75rem 1.25rem; }
+  }
+
+  @media (min-width: 769px) {
+    .show-mobile { display: none !important; }
+    /* Ensure mobile nav can't flash open on desktop */
+    .mobile-nav {
+      max-height: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_header",
+      "label": "Sticky Header",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Contact Button"
+    },
+    {
+      "type": "text",
+      "id": "contact_label",
+      "label": "Button Label",
+      "default": "Contact"
+    },
+    {
+      "type": "url",
+      "id": "contact_url",
+      "label": "Button Link"
+    }
+  ]
+}
+{% endschema %}

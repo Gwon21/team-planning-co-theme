@@ -1,0 +1,451 @@
+<section class="product-detail" {{ section.shopify_attributes }}>
+  <div class="product-detail__inner">
+
+    <!-- Left: Media Gallery -->
+    <div class="product-detail__gallery">
+      {%- if product.images.size > 0 -%}
+        <div class="product-detail__main-image">
+          <img
+            src="{{ product.featured_image | image_url: width: 900 }}"
+            srcset="
+              {{ product.featured_image | image_url: width: 480 }} 480w,
+              {{ product.featured_image | image_url: width: 720 }} 720w,
+              {{ product.featured_image | image_url: width: 900 }} 900w
+            "
+            sizes="(max-width: 900px) 100vw, 50vw"
+            alt="{{ product.featured_image.alt | escape | default: product.title }}"
+            loading="eager"
+            width="900"
+            id="ProductMainImage"
+          >
+          {%- if product.tags contains 'digital' or product.tags contains 'download' -%}
+            <div class="product-detail__badge">DIGITAL DOWNLOAD</div>
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="product-detail__thumbs">
+            {%- for image in product.images limit: 5 -%}
+              <button
+                class="product-detail__thumb"
+                onclick="document.getElementById('ProductMainImage').src='{{ image | image_url: width: 900 }}'"
+                aria-label="View image {{ forloop.index }}"
+              >
+                <img
+                  src="{{ image | image_url: width: 150 }}"
+                  alt="{{ image.alt | escape | default: product.title }}"
+                  loading="lazy"
+                  width="150"
+                >
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      {%- else -%}
+        <div class="product-detail__main-image">
+          {{ 'product-1' | placeholder_svg_tag: 'product-detail__placeholder' }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Right: Product Info -->
+    <div class="product-detail__info">
+
+      {%- if section.settings.show_vendor and product.vendor != blank -%}
+        <span class="product-detail__vendor">{{ product.vendor | upcase }}</span>
+      {%- endif -%}
+
+      <h1 class="product-detail__title">{{ product.title | upcase }}</h1>
+
+      <!-- Price -->
+      <div class="product-detail__price-wrap">
+        {%- render 'product-price', product: product -%}
+      </div>
+
+      <!-- Short Description -->
+      {%- if product.metafields.custom.short_description != blank -%}
+        <p class="product-detail__short-desc">{{ product.metafields.custom.short_description }}</p>
+      {%- endif -%}
+
+      <!-- What's Included Chips -->
+      {%- if product.tags.size > 0 -%}
+        <div class="product-detail__tags">
+          {%- for tag in product.tags -%}
+            {%- unless tag == 'digital' or tag == 'download' or tag contains 'age-' -%}
+              <span class="product-tag">{{ tag | replace: '-', ' ' | capitalize }}</span>
+            {%- endunless -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <!-- Add to Cart Form -->
+      {%- form 'product', product, id: 'ProductForm', novalidate: 'novalidate' -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+        {%- if product.variants.size > 1 -%}
+          <div class="product-detail__variants">
+            <label class="product-detail__field-label">SELECT OPTION</label>
+            <select name="id" class="product-detail__variant-select">
+              {%- for variant in product.variants -%}
+                <option
+                  value="{{ variant.id }}"
+                  {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                  {% unless variant.available %}disabled="disabled"{% endunless %}
+                >
+                  {{ variant.title }}{% unless variant.available %} &ndash; Sold Out{% endunless %}
+                </option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.show_quantity -%}
+          <div class="product-detail__qty-wrap">
+            <label class="product-detail__field-label" for="Qty">QUANTITY</label>
+            <div class="product-detail__qty">
+              <button type="button" class="qty-btn" data-action="decrease">-</button>
+              <input type="number" id="Qty" name="quantity" value="1" min="1" class="qty-input">
+              <button type="button" class="qty-btn" data-action="increase">+</button>
+            </div>
+          </div>
+        {%- endif -%}
+
+        <div class="product-detail__actions">
+          {%- if product.available -%}
+            <button class="btn btn--primary btn--full" type="submit" name="add">
+              {{ 'products.product.add_to_cart' | t }}
+            </button>
+          {%- else -%}
+            <button class="btn btn--primary btn--full" type="button" disabled>
+              {{ 'products.product.sold_out' | t }}
+            </button>
+          {%- endif -%}
+        </div>
+
+      {%- endform -%}
+
+      <!-- Digital Download Note -->
+      <div class="product-detail__download-note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+        </svg>
+        <span>Instant digital download. No physical item will be shipped.</span>
+      </div>
+
+      <!-- Full Description -->
+      {%- if product.description != blank -%}
+        <div class="product-detail__description">
+          <details open>
+            <summary class="product-detail__summary">DESCRIPTION</summary>
+            <div class="product-detail__desc-body rte">
+              {{ product.description }}
+            </div>
+          </details>
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .product-detail {
+    padding: 8rem 0 5rem;
+    background-color: var(--color-surface);
+  }
+
+  .product-detail__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .product-detail__gallery { position: sticky; top: 6rem; }
+
+  .product-detail__main-image {
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background-color: var(--color-surface-container-low);
+    margin-bottom: 1rem;
+  }
+
+  .product-detail__main-image img { width: 100%; height: 100%; object-fit: cover; }
+  .product-detail__placeholder { width: 100%; height: 100%; }
+
+  .product-detail__badge {
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+    background-color: var(--color-primary);
+    color: var(--color-inverse-on-surface);
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    padding: 0.4rem 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .product-detail__thumbs {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    /* Smooth scroll snapping for thumb strip */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .product-detail__thumbs::-webkit-scrollbar { display: none; }
+
+  .product-detail__thumb {
+    flex-shrink: 0;
+    width: 72px;
+    height: 72px;
+    overflow: hidden;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    scroll-snap-align: start;
+    /* Ensure touch target */
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .product-detail__thumb:hover { opacity: 1; }
+  .product-detail__thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+  .product-detail__vendor {
+    display: block;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--color-secondary);
+    margin-bottom: 0.75rem;
+  }
+
+  .product-detail__title {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-primary);
+    margin: 0 0 1.5rem;
+  }
+
+  .product-detail__price-wrap { margin-bottom: 1.5rem; }
+
+  .product-detail__short-desc {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-on-surface-variant);
+    margin: 0 0 1.5rem;
+    max-width: 480px;
+  }
+
+  .product-detail__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .product-tag {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background-color: var(--color-surface-container);
+    color: var(--color-on-surface);
+    padding: 0.35rem 0.7rem;
+  }
+
+  .product-detail__field-label {
+    display: block;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .product-detail__variant-select {
+    width: 100%;
+    background-color: var(--color-surface-container);
+    border: none;
+    padding: 0.9rem 1rem;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.9rem;
+    color: var(--color-on-surface);
+    cursor: pointer;
+    outline: none;
+    margin-bottom: 1.5rem;
+    appearance: none;
+    /* Ensure min height for touch */
+    min-height: 44px;
+  }
+
+  .product-detail__variants { margin-bottom: 1.5rem; }
+  .product-detail__qty-wrap { margin-bottom: 2rem; }
+
+  .product-detail__qty {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: fit-content;
+    border: 2px solid var(--color-surface-container);
+  }
+
+  .qty-btn {
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .qty-btn:hover { background-color: var(--color-surface-container-low); }
+
+  .qty-input {
+    width: 60px;
+    height: 44px;
+    text-align: center;
+    border: none;
+    border-left: 2px solid var(--color-surface-container);
+    border-right: 2px solid var(--color-surface-container);
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-on-surface);
+    background-color: transparent;
+    outline: none;
+  }
+
+  .product-detail__actions { margin-bottom: 1.5rem; }
+
+  .product-detail__download-note {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.8rem;
+    color: var(--color-on-surface-variant);
+    margin-bottom: 2.5rem;
+  }
+
+  .product-detail__description { border-top: 1px solid rgba(195, 198, 206, 0.3); }
+
+  .product-detail__summary {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--color-primary);
+    padding: 1.5rem 0;
+    cursor: pointer;
+    list-style: none;
+    /* Touch-friendly tap area */
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .product-detail__summary::marker,
+  .product-detail__summary::-webkit-details-marker { display: none; }
+
+  .product-detail__desc-body {
+    padding-bottom: 1.5rem;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-on-surface-variant);
+  }
+
+  .rte h2, .rte h3 { font-family: 'Epilogue', sans-serif; font-weight: 700; color: var(--color-primary); }
+
+  /* --- Tablet (≤ 900px) --- */
+  @media (max-width: 900px) {
+    .product-detail__inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .product-detail__gallery { position: static; }
+    .product-detail { padding: 6rem 0 3rem; }
+  }
+
+  /* --- Mobile (≤ 768px) --- */
+  @media (max-width: 768px) {
+    .product-detail {
+      padding: 5rem 0 2.5rem;
+    }
+    .product-detail__inner {
+      padding: 0 1.25rem;
+      gap: 2rem;
+    }
+    .product-detail__title {
+      font-size: clamp(1.75rem, 8vw, 2.5rem);
+      margin-bottom: 1rem;
+    }
+    .product-detail__short-desc {
+      font-size: 0.95rem;
+    }
+  }
+
+  /* --- Small phones (≤ 480px) --- */
+  @media (max-width: 480px) {
+    .product-detail {
+      padding: 4.5rem 0 2rem;
+    }
+    /* Wider thumb strip on very small screens */
+    .product-detail__thumb {
+      width: 64px;
+      height: 64px;
+    }
+    /* Qty input narrower to fit screen */
+    .product-detail__qty {
+      width: 100%;
+      justify-content: space-between;
+    }
+    .qty-input {
+      flex: 1;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product Detail",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show Vendor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quantity",
+      "label": "Show Quantity Selector",
+      "default": false
+    }
+  ]
+}
+{% endschema %}
