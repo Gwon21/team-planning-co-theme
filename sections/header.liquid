@@ -34,6 +34,14 @@
     <!-- Header Actions -->
     <div class="site-header__actions">
 
+      <!-- Contact Button -->
+      <a
+        class="site-header__contact-btn hide-mobile"
+        href="{{ section.settings.contact_url }}"
+      >
+        {{ section.settings.contact_label }}
+      </a>
+
       <!-- Search -->
       <button
         class="site-header__icon-btn"
@@ -171,6 +179,30 @@
     flex-shrink: 0;
   }
 
+  .site-header__contact-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary, #002542);
+    color: #ffffff;
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.55rem 1.25rem;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+    border-radius: 0 !important;
+  }
+
+  .site-header__contact-btn:hover {
+    opacity: 0.82;
+  }
+
   .site-header__icon-btn {
     display: flex;
     align-items: center;
@@ -265,6 +297,21 @@
       "id": "sticky_header",
       "label": "Sticky Header",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Contact Button"
+    },
+    {
+      "type": "text",
+      "id": "contact_label",
+      "label": "Button Label",
+      "default": "Contact"
+    },
+    {
+      "type": "url",
+      "id": "contact_url",
+      "label": "Button Link"
     }
   ]
 }
