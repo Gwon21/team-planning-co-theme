@@ -144,7 +144,8 @@
 
 .svc-grid {
   background-color: var(--color-surface, #fff8f4);
-  padding: 6rem 0 0;
+  /* Top padding: breathing room below the header-cleared main element */
+  padding: 3.5rem 0 0;
 }
 
 .svc-grid__inner {
@@ -164,7 +165,8 @@
 .svc-grid__page-title {
   font-family: 'Epilogue', sans-serif;
   font-weight: 900;
-  font-size: clamp(3.5rem, 8vw, 7rem);
+  /* Reduced max — 5rem is still bold, but won't overflow on mobile */
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
   line-height: 0.95;
   text-transform: uppercase;
   color: var(--color-primary, #002542);
@@ -175,6 +177,8 @@
 .svc-grid__header-right {
   text-align: right;
   padding-top: 0.5rem;
+  flex-shrink: 0;
+  margin-left: 1.5rem;
 }
 
 .svc-grid__brand-label {
@@ -305,6 +309,11 @@
   text-underline-offset: 4px;
   transition: color 0.2s ease;
   margin-top: auto;
+  /* Tap target */
+  padding: 0.5rem 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
 }
 
 .svc-card__cta:hover {
@@ -333,7 +342,7 @@
 .blueprint__heading {
   font-family: 'Epilogue', sans-serif;
   font-weight: 900;
-  font-size: clamp(3rem, 5vw, 5rem);
+  font-size: clamp(2.5rem, 5vw, 5rem);
   line-height: 1;
   text-transform: uppercase;
   color: var(--color-primary, #002542);
@@ -397,20 +406,26 @@
   max-width: 520px;
 }
 
-/* Responsive */
+/* =============================================
+   RESPONSIVE — Tablet (≤ 900px)
+   ============================================= */
 @media (max-width: 900px) {
   .svc-grid__cards {
     grid-template-columns: 1fr;
   }
   .svc-card {
     border-right: none;
+    padding: 3rem 2rem;
+    min-height: auto;
   }
   .svc-grid__header {
     flex-direction: column;
     gap: 1rem;
+    margin-bottom: 2rem;
   }
   .svc-grid__header-right {
     text-align: left;
+    margin-left: 0;
   }
   .blueprint__inner {
     grid-template-columns: 1fr;
@@ -422,6 +437,78 @@
   .blueprint__step {
     grid-template-columns: 60px 1fr;
     gap: 1.5rem;
+  }
+}
+
+/* =============================================
+   RESPONSIVE — Mobile (≤ 768px)
+   ============================================= */
+@media (max-width: 768px) {
+  .svc-grid {
+    /* Reduce breathing room — header is already cleared by main padding-top */
+    padding: 2rem 0 0;
+  }
+
+  .svc-grid__inner {
+    padding: 0 1.25rem;
+  }
+
+  .svc-grid__page-title {
+    /* Tighter clamp — fully visible on all phone sizes */
+    font-size: clamp(2.25rem, 11vw, 3.5rem);
+  }
+
+  .svc-grid__header {
+    margin-bottom: 1.5rem;
+  }
+
+  .svc-card {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .svc-card__num {
+    font-size: 3rem;
+  }
+
+  .blueprint {
+    padding: 4rem 0;
+  }
+
+  .blueprint__inner {
+    padding: 0 1.25rem;
+    gap: 2rem;
+  }
+
+  .blueprint__steps {
+    gap: 2.5rem;
+  }
+}
+
+/* =============================================
+   RESPONSIVE — Small phones (≤ 480px)
+   ============================================= */
+@media (max-width: 480px) {
+  .svc-grid {
+    padding: 1.5rem 0 0;
+  }
+
+  .svc-grid__page-title {
+    font-size: clamp(2rem, 12vw, 3rem);
+    /* Allow line break to keep each word on its own line cleanly */
+    word-break: keep-all;
+  }
+
+  .svc-card {
+    padding: 2rem 1.25rem;
+  }
+
+  .blueprint__step {
+    grid-template-columns: 48px 1fr;
+    gap: 1rem;
+  }
+
+  .blueprint__step-num {
+    font-size: 2.5rem;
   }
 }
 

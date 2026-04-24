@@ -34,7 +34,7 @@
     <!-- Header Actions -->
     <div class="site-header__actions">
 
-      <!-- Contact Button -->
+      <!-- Contact Button (desktop only) -->
       <a
         class="site-header__contact-btn hide-mobile"
         href="{{ section.settings.contact_url }}"
@@ -70,22 +70,22 @@
         {%- endif -%}
       </a>
 
-      <!-- Mobile Menu Toggle — animated hamburger / X -->
+      <!-- Mobile Menu Toggle -->
       <button
         class="site-header__icon-btn site-header__mobile-toggle show-mobile"
-        aria-label="{{ 'accessibility.open_menu' | t }}"
+        aria-label="Open menu"
         aria-expanded="false"
-        aria-controls="mobile-nav"
+        aria-controls="mobile-nav-overlay"
         data-action="toggle-mobile-menu"
       >
-        <!-- Hamburger icon (shown when closed) -->
-        <svg class="icon-burger" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <line x1="3" y1="12" x2="21" y2="12"/>
-          <line x1="3" y1="18" x2="21" y2="18"/>
-        </svg>
-        <!-- X icon (shown when open) -->
-        <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <!-- Hamburger lines -->
+        <span class="burger-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <!-- X icon -->
+        <svg class="close-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
           <line x1="18" y1="6" x2="6" y2="18"/>
           <line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
@@ -93,36 +93,61 @@
 
     </div>
   </div>
+</nav>
 
-  <!-- Mobile Navigation Drawer -->
-  <div class="mobile-nav show-mobile" id="mobile-nav" aria-hidden="true">
+<!-- ============================================================
+   FULL-SCREEN MOBILE NAV OVERLAY
+   Slides in from the right. Does NOT push page content down.
+   ============================================================ -->
+<div
+  class="mobile-nav-overlay show-mobile"
+  id="mobile-nav-overlay"
+  aria-hidden="true"
+  role="dialog"
+  aria-label="Mobile navigation"
+>
+  <!-- Nav links — large, centered, easy to tap -->
+  <nav class="mobile-nav-overlay__nav">
     {%- if section.settings.menu != blank -%}
       {%- assign menu = linklists[section.settings.menu] -%}
       {%- for link in menu.links -%}
         <a
-          class="mobile-nav__link{% if link.active %} active{% endif %}"
+          class="mobile-nav-overlay__link{% if link.active %} active{% endif %}"
           href="{{ link.url }}"
         >
-          {{ link.title | upcase }}
+          {{ link.title }}
         </a>
       {%- endfor -%}
     {%- endif -%}
-    <a href="{{ routes.cart_url }}" class="mobile-nav__link">
-      CART {% if cart.item_count > 0 %}({{ cart.item_count }}){% endif %}
+    <a href="{{ routes.cart_url }}" class="mobile-nav-overlay__link">
+      Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}
     </a>
-  </div>
-</nav>
+  </nav>
+
+  <!-- Contact CTA at the bottom of the overlay -->
+  {%- if section.settings.contact_url != blank -%}
+    <div class="mobile-nav-overlay__footer">
+      <a class="btn btn--secondary" href="{{ section.settings.contact_url }}">
+        {{ section.settings.contact_label | default: 'Contact Us' | upcase }}
+      </a>
+    </div>
+  {%- endif -%}
+</div>
+
+<!-- Dimmed backdrop (behind overlay, closes menu when tapped) -->
+<div class="mobile-nav-backdrop show-mobile" id="mobile-nav-backdrop" aria-hidden="true"></div>
 
 {% stylesheet %}
+  /* ---- Site Header ---- */
   .site-header {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 100;
-    background-color: rgba(255, 248, 244, 0.85);
+    z-index: 200;
+    background-color: rgba(255, 248, 244, 0.92);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    box-shadow: 0 4px 32px 0 rgba(40, 24, 1, 0.06);
+    box-shadow: 0 2px 20px 0 rgba(40, 24, 1, 0.07);
     transition: background-color 0.3s ease;
   }
 
@@ -139,6 +164,8 @@
   .site-header__logo {
     text-decoration: none;
     flex-shrink: 0;
+    position: relative;
+    z-index: 201; /* stays above overlay */
   }
 
   .site-header__logo img {
@@ -181,8 +208,10 @@
   .site-header__actions {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
     flex-shrink: 0;
+    position: relative;
+    z-index: 201;
   }
 
   .site-header__contact-btn {
@@ -203,6 +232,7 @@
     transition: opacity 0.2s ease;
     white-space: nowrap;
     border-radius: 0 !important;
+    min-height: 44px;
   }
 
   .site-header__contact-btn:hover {
@@ -217,12 +247,12 @@
     border: none;
     cursor: pointer;
     color: var(--color-primary);
-    padding: 0.25rem;
+    padding: 0.5rem;
     position: relative;
     transition: opacity 0.2s ease;
-    /* Minimum touch target */
     min-width: 44px;
     min-height: 44px;
+    border-radius: 0;
   }
 
   .site-header__icon-btn:hover {
@@ -231,102 +261,167 @@
 
   .cart-count {
     position: absolute;
-    top: -6px;
-    right: -6px;
+    top: 4px;
+    right: 4px;
     background-color: var(--color-secondary);
     color: #fff;
     font-family: 'Manrope', sans-serif;
     font-weight: 800;
-    font-size: 0.65rem;
-    width: 18px;
-    height: 18px;
+    font-size: 0.6rem;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  /* --- Animated burger / X icons --- */
-  .icon-burger,
-  .icon-close {
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    position: absolute;
-  }
-
-  /* Default: show burger, hide X */
-  .icon-close {
-    opacity: 0;
-    transform: rotate(-45deg) scale(0.8);
-  }
-
-  .icon-burger {
-    opacity: 1;
-    transform: rotate(0deg) scale(1);
-  }
-
-  /* When menu is open: show X, hide burger */
-  .site-header__mobile-toggle[aria-expanded="true"] .icon-burger {
-    opacity: 0;
-    transform: rotate(45deg) scale(0.8);
-  }
-
-  .site-header__mobile-toggle[aria-expanded="true"] .icon-close {
-    opacity: 1;
-    transform: rotate(0deg) scale(1);
-  }
-
-  /* --- Mobile Navigation Drawer --- */
-  .mobile-nav {
-    display: none;
+  /* ---- Animated Burger Icon ---- */
+  .burger-icon {
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 22px;
+    height: 22px;
+    transition: opacity 0.2s ease;
+  }
+
+  .burger-icon span {
+    display: block;
+    width: 100%;
+    height: 2px;
     background-color: var(--color-primary);
-    padding: 0 2rem;
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.4s ease, padding 0.4s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
   }
 
-  .mobile-nav.is-open {
-    max-height: 600px;
-    padding: 1.5rem 2rem 2rem;
+  .close-icon {
+    position: absolute;
+    opacity: 0;
+    transform: rotate(-45deg) scale(0.7);
+    transition: opacity 0.25s ease, transform 0.25s ease;
   }
 
-  .mobile-nav__link {
+  /* Menu open state: hide burger lines, show X */
+  .site-header__mobile-toggle[aria-expanded="true"] .burger-icon span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .site-header__mobile-toggle[aria-expanded="true"] .burger-icon span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .site-header__mobile-toggle[aria-expanded="true"] .burger-icon span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ---- Full-Screen Mobile Nav Overlay ---- */
+  .mobile-nav-overlay {
+    display: none; /* shown only on mobile via .show-mobile */
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 199; /* just below header (200) */
+    background-color: var(--color-primary, #002542);
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Top padding clears the fixed header */
+    padding-top: calc(var(--header-height, 70px) + 1.5rem);
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px));
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .mobile-nav-overlay.is-open {
+    transform: translateX(0);
+  }
+
+  .mobile-nav-overlay__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    flex: 1;
+  }
+
+  .mobile-nav-overlay__link {
+    display: block;
     font-family: 'Epilogue', sans-serif;
-    font-weight: 700;
-    font-size: 1.25rem;
-    letter-spacing: 0.05em;
+    font-weight: 900;
+    font-size: clamp(2rem, 8vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
     text-transform: uppercase;
-    color: var(--color-inverse-on-surface);
+    color: var(--color-inverse-on-surface, #ffeedb);
     text-decoration: none;
     padding: 0.85rem 0;
-    border-bottom: 1px solid rgba(255, 238, 219, 0.1);
-    transition: color 0.2s ease;
-    /* Ensure touch-friendly tap area */
-    display: block;
-    min-height: 44px;
+    border-bottom: 1px solid rgba(255, 238, 219, 0.08);
+    transition: color 0.2s ease, padding-left 0.2s ease;
+    /* Ensure tappable */
+    min-height: 60px;
   }
 
-  .mobile-nav__link:hover,
-  .mobile-nav__link.active {
-    color: var(--color-secondary);
+  .mobile-nav-overlay__link:hover,
+  .mobile-nav-overlay__link:focus,
+  .mobile-nav-overlay__link.active {
+    color: var(--color-secondary, #c9a96e);
+    padding-left: 0.5rem;
   }
 
-  /* --- Responsive visibility helpers --- */
+  .mobile-nav-overlay__footer {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 238, 219, 0.1);
+  }
+
+  .mobile-nav-overlay__footer .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* ---- Dimmed Backdrop ---- */
+  .mobile-nav-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 198; /* below overlay (199) */
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    backdrop-filter: blur(2px);
+  }
+
+  .mobile-nav-backdrop.is-visible {
+    opacity: 1;
+  }
+
+  /* ---- Responsive Visibility ---- */
   @media (max-width: 768px) {
     .hide-mobile { display: none !important; }
     .show-mobile { display: flex !important; }
-    .mobile-nav { display: flex; }
+    .mobile-nav-overlay { display: flex; }
+    .mobile-nav-backdrop { display: block; }
     .site-header__inner { padding: 0.75rem 1.25rem; }
+
+    /* Keep logo text visible in light color when overlay is open */
+    .site-header.menu-is-open .site-header__logo-text {
+      color: var(--color-primary);
+    }
   }
 
   @media (min-width: 769px) {
     .show-mobile { display: none !important; }
-    /* Ensure mobile nav can't flash open on desktop */
-    .mobile-nav {
-      max-height: 0 !important;
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
+    /* Force closed on desktop */
+    .mobile-nav-overlay {
+      transform: translateX(100%) !important;
+    }
+    .mobile-nav-backdrop {
+      display: none !important;
     }
   }
 {% endstylesheet %}
