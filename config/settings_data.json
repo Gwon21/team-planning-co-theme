@@ -33,7 +33,9 @@
         "type": "header",
         "settings": {
           "menu": "main-menu",
-          "sticky_header": true
+          "sticky_header": true,
+          "contact_label": "Contact",
+          "contact_url": "shopify://pages/contact"
         }
       },
       "footer": {
