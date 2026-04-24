@@ -7,6 +7,12 @@
         <div class="product-detail__main-image">
           <img
             src="{{ product.featured_image | image_url: width: 900 }}"
+            srcset="
+              {{ product.featured_image | image_url: width: 480 }} 480w,
+              {{ product.featured_image | image_url: width: 720 }} 720w,
+              {{ product.featured_image | image_url: width: 900 }} 900w
+            "
+            sizes="(max-width: 900px) 100vw, 50vw"
             alt="{{ product.featured_image.alt | escape | default: product.title }}"
             loading="eager"
             width="900"
@@ -188,7 +194,13 @@
     display: flex;
     gap: 0.75rem;
     overflow-x: auto;
+    /* Smooth scroll snapping for thumb strip */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+
+  .product-detail__thumbs::-webkit-scrollbar { display: none; }
 
   .product-detail__thumb {
     flex-shrink: 0;
@@ -201,6 +213,10 @@
     padding: 0;
     opacity: 0.6;
     transition: opacity 0.2s ease;
+    scroll-snap-align: start;
+    /* Ensure touch target */
+    min-width: 44px;
+    min-height: 44px;
   }
 
   .product-detail__thumb:hover { opacity: 1; }
@@ -277,6 +293,8 @@
     outline: none;
     margin-bottom: 1.5rem;
     appearance: none;
+    /* Ensure min height for touch */
+    min-height: 44px;
   }
 
   .product-detail__variants { margin-bottom: 1.5rem; }
@@ -343,6 +361,10 @@
     padding: 1.5rem 0;
     cursor: pointer;
     list-style: none;
+    /* Touch-friendly tap area */
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 
   .product-detail__summary::marker,
@@ -358,10 +380,52 @@
 
   .rte h2, .rte h3 { font-family: 'Epilogue', sans-serif; font-weight: 700; color: var(--color-primary); }
 
+  /* --- Tablet (≤ 900px) --- */
   @media (max-width: 900px) {
-    .product-detail__inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .product-detail__inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
     .product-detail__gallery { position: static; }
     .product-detail { padding: 6rem 0 3rem; }
+  }
+
+  /* --- Mobile (≤ 768px) --- */
+  @media (max-width: 768px) {
+    .product-detail {
+      padding: 5rem 0 2.5rem;
+    }
+    .product-detail__inner {
+      padding: 0 1.25rem;
+      gap: 2rem;
+    }
+    .product-detail__title {
+      font-size: clamp(1.75rem, 8vw, 2.5rem);
+      margin-bottom: 1rem;
+    }
+    .product-detail__short-desc {
+      font-size: 0.95rem;
+    }
+  }
+
+  /* --- Small phones (≤ 480px) --- */
+  @media (max-width: 480px) {
+    .product-detail {
+      padding: 4.5rem 0 2rem;
+    }
+    /* Wider thumb strip on very small screens */
+    .product-detail__thumb {
+      width: 64px;
+      height: 64px;
+    }
+    /* Qty input narrower to fit screen */
+    .product-detail__qty {
+      width: 100%;
+      justify-content: space-between;
+    }
+    .qty-input {
+      flex: 1;
+    }
   }
 {% endstylesheet %}
 
